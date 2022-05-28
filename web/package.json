@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && prettier --check ."
+    "lint": "next lint && prettier --check .",
+    "test": "jest"
   },
   "dependencies": {
     "next": "12.1.6",
