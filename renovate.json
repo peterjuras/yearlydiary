@@ -1,0 +1,17 @@
+{
+  "extends": ["config:base", "group:allNonMajor"],
+  "schedule": "on Friday",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "branch"
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}
