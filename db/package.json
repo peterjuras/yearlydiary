@@ -1,0 +1,38 @@
+{
+  "name": "yearlydiary-db",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@coat/cli": "0.0.26",
+    "@coat/template-ts-package": "0.0.38",
+    "@types/jest": "^27.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.1.0",
+    "jest": "^28.0.3",
+    "prettier": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.0",
+    "typescript": "~4.7.2"
+  },
+  "files": [
+    "build/"
+  ],
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "coat run lint:*",
+    "lint:eslint": "eslint --ext .ts --max-warnings 0 src",
+    "lint:prettier": "prettier --check src",
+    "lint:types": "tsc",
+    "migrate": "node-pg-migrate",
+    "prebuild": "rimraf build",
+    "start-local-db": "docker run --rm -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
+    "test": "jest"
+  },
+  "dependencies": {
+    "node-pg-migrate": "6.2.1",
+    "pg": "8.7.3"
+  }
+}

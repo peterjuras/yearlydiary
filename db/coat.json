@@ -1,0 +1,4 @@
+{
+  "name": "yearlydiary-db",
+  "extends": "@coat/template-ts-package"
+}

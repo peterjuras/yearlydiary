@@ -1,0 +1,43 @@
+dependencies:
+  devDependencies:
+    - "@types/jest"
+    - "@typescript-eslint/eslint-plugin"
+    - "@typescript-eslint/parser"
+    - eslint
+    - eslint-config-prettier
+    - jest
+    - prettier
+    - rimraf
+    - ts-jest
+    - typescript
+files:
+  - hash: >-
+      n1uS6ajZMpOfiWQhE24L1oIsASvT63ay5GkxYOiYFBgF2SiwUbHQVMxdtPq9a5KyBtaZkpUtk7A/9frYkb1nzw==
+    path: .eslintrc
+  - hash: >-
+      fxSZnVg1JXiEGv1w/4+1LpWhyUWeFgVRnyX8grd7X6S0JOseqVFI+GZS4O8s7QGhF0D2c/RfzdmEEbCDjdrbcw==
+    path: .gitignore
+  - hash: >-
+      7sMiOmK0ZjcQbCxHzfFGC2/K/52PLB7N/HqEEsJLtiaPkDX/JkFR6irQ62zJVaGwHF75gMsYyMhiOdzSvFR7hA==
+    path: jest.config.json
+  - once: true
+    path: README.md
+  - once: true
+    path: src/index.test.ts
+  - once: true
+    path: src/index.ts
+  - hash: >-
+      zN51ATJNBuF7EqPvKtnvN8DjhfuWBsojjSkOl2y67qI9j8LmkNmsh0DBkLk3qDJm8dQ025+bGUNNfZBmxx81Gg==
+    path: tsconfig.build.json
+  - hash: >-
+      JJeYU1HPTvwmHwyN4lSNtinTFSfil9g5qBI1G4iq3U+n4xMoqbT3Um6d7IPZkp6fNWpb4k6JmJdbj6U1DGTO4w==
+    path: tsconfig.json
+scripts:
+  - build
+  - lint
+  - lint:eslint
+  - lint:prettier
+  - lint:types
+  - prebuild
+  - test
+version: 1
