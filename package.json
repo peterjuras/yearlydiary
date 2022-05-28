@@ -5,6 +5,11 @@
   "author": "Peter Juras <me@peterjuras.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test",
+    "build": "yarn workspaces run build"
+  },
   "workspaces": {
     "packages": [
       "web"
