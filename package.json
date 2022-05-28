@@ -1,0 +1,13 @@
+{
+  "name": "yearlydiary",
+  "version": "1.0.0",
+  "repository": "git@github.com:peterjuras/yearlydiary.git",
+  "author": "Peter Juras <me@peterjuras.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "web"
+    ]
+  }
+}
