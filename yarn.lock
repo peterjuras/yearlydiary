@@ -4305,7 +4305,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4403,6 +4403,15 @@ react-style-singleton@^2.2.0:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^2.0.0"
+
+react-time-sync@5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-time-sync/-/react-time-sync-5.2.1.tgz#138dfbf8f4e6044d9461c3dcfffb1c0fa61129da"
+  integrity sha512-K/4In3QuSfzI+/FHb6pa5ITYXcrahvDUHiTPZtpViwTyRmszV5q5JSChxy9GW91npqSMMtIunr33UWyV0dJGsA==
+  dependencies:
+    prop-types "^15.7.2"
+    time-sync "^2.3.0"
+    use-state-with-deps "^1.1.0"
 
 react@18.1.0:
   version "18.1.0"
@@ -4849,6 +4858,11 @@ throat@^6.0.1:
   resolved "https://registry.yarnpkg.com/throat/-/throat-6.0.1.tgz#d514fedad95740c12c2d7fc70ea863eb51ade375"
   integrity sha512-8hmiGIJMDlwjg7dlJ4yKGLK8EsYqKgPWbG3b4wjJddKNwc7N7Dpn08Df4szr/sZdMVeOstrdYSsqzX6BYbcB+w==
 
+time-sync@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/time-sync/-/time-sync-2.3.0.tgz#685f86671f30ab23947e77e5ba8634d07ecea15b"
+  integrity sha512-wWPg3R1rMkY//Vl/uRGwcXIhH+fwGQDteY8xLxZwB6Q4rePRTKSn8IfNZs8gyEdWssc8JcBenc9wyNLhAfaGhA==
+
 tiny-invariant@^1.0.6:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
@@ -4989,6 +5003,11 @@ use-sidecar@^1.1.2:
   dependencies:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
+
+use-state-with-deps@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/use-state-with-deps/-/use-state-with-deps-1.1.1.tgz#3090402abc4b8021403887e1629777bdfbf85795"
+  integrity sha512-eUy7deac8ncYiJM5GNjTVV1Bew1FXEXhYYUqJvdV8OakWRHovN5FSakDOgZulLTs0WiGGO92ariUc8+VQbZ5Dg==
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"

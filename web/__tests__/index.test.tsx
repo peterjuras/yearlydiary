@@ -1,12 +1,14 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import Home from "../pages";
 
 describe("Home", () => {
-  it("renders the hello world text", () => {
+  it("renders the current date", () => {
     render(<Home />);
 
-    const helloWorldText = screen.getByText("Hello Yearlydiary");
+    const currentDate = new Intl.DateTimeFormat().format(new Date());
 
-    expect(helloWorldText).toBeInTheDocument();
+    const dateElement = screen.getByText(currentDate);
+
+    expect(dateElement).toBeInTheDocument();
   });
 });
