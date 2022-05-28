@@ -1,0 +1,15 @@
+{
+  "folders": [
+	{
+		"name": "✨ yearlydiary",
+		"path": "."
+	},
+	{
+		"name": "🚀 yearlydiary-web",
+		"path": "web"
+	}
+],
+  "settings": {
+    "conventionalCommits.scopes": ["web"]
+  }
+}
