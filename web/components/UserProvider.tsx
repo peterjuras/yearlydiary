@@ -9,7 +9,7 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
   useEffect(() => {
     let newUserId: string | undefined;
-    if (typeof window === "undefined" || userId || !router.isReady) {
+    if (typeof window === "undefined" || userId || !router || !router.isReady) {
       // SSR, router not ready or userId already set, aborting
       return;
     }
