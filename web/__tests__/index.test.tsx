@@ -2,13 +2,11 @@ import { render, screen } from "@testing-library/react";
 import Home from "../pages";
 
 describe("Home", () => {
-  it("renders a heading", () => {
+  it("renders the hello world text", () => {
     render(<Home />);
 
-    const heading = screen.getByRole("heading", {
-      name: /welcome to next\.js!/i,
-    });
+    const helloWorldText = screen.getByText("Hello Yearlydiary");
 
-    expect(heading).toBeInTheDocument();
+    expect(helloWorldText).toBeInTheDocument();
   });
 });
