@@ -5,7 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  try {
     const {
       method,
       query: { userId },
@@ -27,8 +26,4 @@ export default async function handler(
       default:
         res.status(400).end();
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).end();
-  }
 }
