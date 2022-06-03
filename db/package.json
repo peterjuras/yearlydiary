@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "@coat/cli": "0.0.26",
-    "@coat/template-ts-package": "0.0.38",
+    "@coat/template-ts-package": "0.0.39",
     "@types/jest": "28.1.0",
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
