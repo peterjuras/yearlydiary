@@ -905,10 +905,10 @@
     unquoted-property-validator "1.1.0"
     wrap-ansi "7.0.0"
 
-"@coat/template-ts-package@0.0.38":
-  version "0.0.38"
-  resolved "https://registry.yarnpkg.com/@coat/template-ts-package/-/template-ts-package-0.0.38.tgz#5186894db6945fddd6ad1fc30aa974ced0690379"
-  integrity sha512-CAweE8e0xNi0pPpLFOq4GNjtCMx4HZO34DUId0ZA5dEmAPqlzmdJJMAaSximswHjnGliUbGC6mp5io0bAEFLYw==
+"@coat/template-ts-package@0.0.39":
+  version "0.0.39"
+  resolved "https://registry.yarnpkg.com/@coat/template-ts-package/-/template-ts-package-0.0.39.tgz#aa632cf151cb5eeff8c147ad6086b5fad4c71a50"
+  integrity sha512-3MwMBTgzFTuOe/JQEyxeNNDAfs1I8ffc5xr91iOvB0A1BqatOR3AczMxQ8ceTgNF/JDphvpNwRT1DxJNmuH76A==
 
 "@ctrl/tinycolor@^3.4.0":
   version "3.4.1"
@@ -3107,10 +3107,10 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-framer-motion@6.3.6:
-  version "6.3.6"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.3.6.tgz#9ca52544a7d0c74668f880eb2cab4a5de6dc71a0"
-  integrity sha512-gaCmjkg8J72EBiSQAxjY0elzxVQL3GMPA4jQGIvrMa+kiVDyLG0WXQTwAQnJpsylIa/ySDz3djQt2YyD8AKZ7Q==
+framer-motion@6.3.8:
+  version "6.3.8"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.3.8.tgz#8bfc3845d00404c6a85ab7764851d2fb23cee753"
+  integrity sha512-FBbSAG/kzi3Tm9taF6tULhdKtWqiXmISBocsNC+jqHMQP/3PsnS0dFL2qZMmwgVAGwg3InhY739gKNjqOCR7Cw==
   dependencies:
     framesync "6.0.1"
     hey-listen "^1.0.8"
