@@ -5,14 +5,14 @@
     "@coat/cli": "0.0.26",
     "@coat/template-ts-package": "0.0.38",
     "@types/jest": "28.1.0",
-    "@typescript-eslint/eslint-plugin": "5.26.0",
-    "@typescript-eslint/parser": "5.26.0",
+    "@typescript-eslint/eslint-plugin": "5.27.0",
+    "@typescript-eslint/parser": "5.27.0",
     "eslint": "8.16.0",
     "eslint-config-prettier": "8.5.0",
     "jest": "28.1.0",
     "prettier": "2.6.2",
     "rimraf": "3.0.2",
-    "ts-jest": "28.0.3",
+    "ts-jest": "28.0.4",
     "typescript": "4.7.2"
   },
   "files": [
