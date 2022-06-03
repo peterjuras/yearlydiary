@@ -4,7 +4,7 @@
   "devDependencies": {
     "@coat/cli": "0.0.26",
     "@coat/template-ts-package": "0.0.38",
-    "@types/jest": "27.5.1",
+    "@types/jest": "28.1.0",
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
     "eslint": "8.16.0",
