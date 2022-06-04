@@ -1,17 +1,19 @@
 import { Divider, Flex, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { DateContext } from "./DateContext";
 
 const Header: React.FC = () => {
-  const { selectedDate } = useContext(DateContext);
-  const [displayedDate, setDisplayedDate] = useState("");
+  const router = useRouter();
+  const { day, month, year } = router.query;
 
-  useEffect(() => {
-    console.log(selectedDate);
-    setDisplayedDate(
-      new Intl.DateTimeFormat().format(new Date(selectedDate * 1000))
-    );
-  }, [selectedDate]);
+  let displayedDate = "";
+  if (router.isReady && day && month && year) {
+    const date = new Date();
+    date.setFullYear(parseInt(year as string));
+    date.setMonth(parseInt(month as string));
+    date.setDate(parseInt(day as string));
+    displayedDate = new Intl.DateTimeFormat().format(date);
+  }
 
   return (
     <Flex paddingTop={2} align="center" justify="center" direction="column">

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { storePost } from "../../../lib/db";
+import { storePost } from "../../../../lib-server/db";
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,18 +11,14 @@ export default async function handler(
     body,
   } = req;
 
-  console.log({ method, userId, body });
-
   switch (method) {
-    case "GET":
-      res.status(204).end();
-      break;
-    case "POST":
-      const { day, month, year, answer } = body;
+    case "POST": {
+      const { day, month, year, answer } = JSON.parse(body);
       // TODO: Validation, sanitization
       await storePost(userId as string, day, month, year, answer);
       res.status(204).end();
       break;
+    }
     default:
       res.status(400).end();
   }
