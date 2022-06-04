@@ -14,6 +14,7 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["web", "db"]
+    "conventionalCommits.scopes": ["web", "db"],
+    "typescript.tsdk": "✨ yearlydiary/node_modules/typescript/lib"
   }
 }
