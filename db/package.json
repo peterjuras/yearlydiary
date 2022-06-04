@@ -5,12 +5,17 @@
     "@coat/cli": "0.0.26",
     "@coat/template-ts-package": "0.0.39",
     "@types/jest": "28.1.0",
+    "@types/promise-retry": "1.1.3",
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
     "eslint": "8.16.0",
     "eslint-config-prettier": "8.5.0",
+    "execa": "6.1.0",
     "jest": "28.1.0",
+    "node-pg-migrate": "6.2.1",
+    "pg": "8.7.3",
     "prettier": "2.6.2",
+    "promise-retry": "2.0.1",
     "rimraf": "3.0.2",
     "ts-jest": "28.0.4",
     "typescript": "4.7.2"
@@ -18,21 +23,17 @@
   "files": [
     "build/"
   ],
-  "private": true,
   "license": "MIT",
+  "private": true,
   "scripts": {
+    "bootstrap-db": "yarn build && node build/bootstrap-database",
     "build": "tsc -p tsconfig.build.json",
     "lint": "coat run lint:*",
     "lint:eslint": "eslint --ext .ts --max-warnings 0 src",
     "lint:prettier": "prettier --check src",
     "lint:types": "tsc",
     "migrate": "node-pg-migrate",
-    "prebuild": "rimraf build",
-    "start-local-db": "docker run --rm -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
+    "start-local-db": "yarn build && node build/start-local-db",
     "test": "jest"
-  },
-  "dependencies": {
-    "node-pg-migrate": "6.2.1",
-    "pg": "8.7.3"
   }
 }

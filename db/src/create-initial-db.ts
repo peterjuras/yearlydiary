@@ -3,9 +3,12 @@ import path from "node:path";
 import { DB_URL } from "./env";
 
 export async function main(): Promise<void> {
+  // Strip database from postgres connection string
+  const databaseUrlWithoutDb = DB_URL.split("/").slice(0, -1).join("/");
+
   await migrate({
-    databaseUrl: `${DB_URL}/postgres`,
-    migrationsTable: "node-pg-migrations",
+    databaseUrl: `${databaseUrlWithoutDb}/postgres`,
+    migrationsTable: "pgmigrations",
     dir: path.join(__dirname, "create-db-migrations"),
     direction: "up",
   });

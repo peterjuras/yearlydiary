@@ -4,7 +4,6 @@ import { POSTS_TABLE } from "../constants";
 export const shorthands: ColumnDefinitions | undefined = undefined;
 
 exports.up = async (pgm: MigrationBuilder): Promise<void> => {
-  pgm.noTransaction();
   pgm.createTable(POSTS_TABLE, {
     id: "id",
     user_id: {

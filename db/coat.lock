@@ -27,10 +27,10 @@ files:
   - once: true
     path: src/index.ts
   - hash: >-
-      zN51ATJNBuF7EqPvKtnvN8DjhfuWBsojjSkOl2y67qI9j8LmkNmsh0DBkLk3qDJm8dQ025+bGUNNfZBmxx81Gg==
+      ix4emDAZ0kkpEZmfLFPj2RdsGuU1Cc3HpQTpCrsze9cB79ItutHn747PSBikMXNOKq9B6m9KATleE0UqrijIWQ==
     path: tsconfig.build.json
   - hash: >-
-      JJeYU1HPTvwmHwyN4lSNtinTFSfil9g5qBI1G4iq3U+n4xMoqbT3Um6d7IPZkp6fNWpb4k6JmJdbj6U1DGTO4w==
+      t+ujqIspDkLi28denECkaL5CgLPSR1sIH2knjNI4md0GcCnX2E86zApCb2kNitveQG5PE2ix8gefk5bNeU47oQ==
     path: tsconfig.json
 scripts:
   - build
