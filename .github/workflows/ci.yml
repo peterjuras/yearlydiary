@@ -3,11 +3,11 @@ on:
   - push
 
 jobs:
-  build:
-    name: Build & Test
+  test:
+    name: Lint & Test
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.ref }}-build-test
+      group: ${{ github.ref }}-lint-test
       cancel-in-progress: true
     env:
       CI: true
@@ -20,17 +20,10 @@ jobs:
         run: yarn lint
       - name: Test
         run: yarn test --ci
-      - name: Build
-        run: yarn build
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: web-build
-          path: web/.next
 
   deploy:
     name: Deploy
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.ref }}-deploy-web
@@ -38,11 +31,6 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v3
-      - name: Download web build
-        uses: actions/download-artifact@v3
-        with:
-          name: web-build
-          path: web/.next
       - name: Deploy to vercel (production)
         if: github.ref == 'refs/heads/main'
         uses: amondnet/vercel-action@v20

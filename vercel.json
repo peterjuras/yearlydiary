@@ -2,6 +2,5 @@
   "version": 2,
   "github": {
     "enabled": false
-  },
-  "builds": [{ "src": "web/.next", "use": "@vercel/static" }]
+  }
 }
