@@ -6,6 +6,9 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.ref }}-build-test
+      cancel-in-progress: true
     env:
       CI: true
     steps:
@@ -15,7 +18,41 @@ jobs:
         run: git diff --exit-code
       - name: Lint
         run: yarn lint
-      - name: Build
-        run: yarn build
       - name: Test
         run: yarn test --ci
+      - name: Build
+        run: yarn build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web-build
+          path: web/.next
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.ref }}-deploy-web
+    env:
+      CI: true
+    steps:
+      - name: Download web build
+        uses: actions/download-artifact@v3
+        with:
+          name: web-build
+      - name: Deploy to vercel (production)
+        if: github.ref == 'refs/heads/main'
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: "--prod"
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+      - name: Deploy to vercel (preview)
+        if: github.ref != 'refs/heads/main'
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
