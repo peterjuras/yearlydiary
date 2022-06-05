@@ -27,8 +27,10 @@ jobs:
         with:
           name: web-build
           path: web/.next
+
   deploy:
     name: Deploy
+    needs: build
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.ref }}-deploy-web
