@@ -37,10 +37,12 @@ jobs:
     env:
       CI: true
     steps:
+      - uses: actions/checkout@v3
       - name: Download web build
         uses: actions/download-artifact@v3
         with:
           name: web-build
+          path: web/.next
       - name: Deploy to vercel (production)
         if: github.ref == 'refs/heads/main'
         uses: amondnet/vercel-action@v20
@@ -58,3 +60,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          working-directory: web/.next
