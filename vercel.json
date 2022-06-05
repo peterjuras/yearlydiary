@@ -3,5 +3,5 @@
   "github": {
     "enabled": false
   },
-  "builds": [{ "src": ".", "use": "@vercel/static" }]
+  "builds": [{ "src": "web/.next", "use": "@vercel/static" }]
 }
