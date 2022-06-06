@@ -1,33 +1,16 @@
-import { Flex, Spinner } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import { fetcher } from "../lib-client/fetcher";
+import { Flex, Text } from "@chakra-ui/react";
+import { Answer } from "../types/answer";
 import AnswerDisplay from "./AnswerDisplay";
+interface AllAnswersProps {
+  answers: Answer[];
+}
 
-const AllAnswers: React.FC = () => {
-  const router = useRouter();
-
-  const { day, month, year } = router.query;
-
-  const getAllPostsUrl = `/api/posts/${year}/${month}/${day}`;
-
-  const { data, error } = useSWR<{ answer: string }[]>(
-    router.isReady ? getAllPostsUrl : null,
-    fetcher
-  );
-
-  const isLoading = !router.isReady || (!data && !error);
-
-  // TODO: Handle error
-
-  if (isLoading || !data) {
-    return <Spinner alignSelf="center" />;
-  }
-
+const AllAnswers: React.FC<AllAnswersProps> = ({ answers }) => {
   return (
     <Flex direction="column">
-      {data.map(({ answer }, index) => (
-        <AnswerDisplay key={index} answer={answer} />
+      {!answers.length && <Text>There are no answers yet.</Text>}
+      {answers.map(({ answer, year }, index) => (
+        <AnswerDisplay key={index} answer={answer} year={year} />
       ))}
     </Flex>
   );

@@ -1,20 +1,27 @@
-import { Button, Flex, Spinner, Text, Textarea } from "@chakra-ui/react";
+import { Button, Flex, Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import useSWR from "swr";
+import { ChangeEvent, useContext, useState } from "react";
 import { uploadPost } from "../lib-client/api";
-import { fetcher } from "../lib-client/fetcher";
+import { Answer } from "../types/answer";
 import AnswerDisplay from "./AnswerDisplay";
 import { UserContext } from "./UserContext";
 
-const AnswerInput: React.FC = () => {
+interface AnswerInputProps {
+  storedAnswer: Answer | undefined;
+  currentYear: number;
+}
+
+const AnswerInput: React.FC<AnswerInputProps> = ({
+  storedAnswer,
+  currentYear,
+}) => {
   const [answer, setAnswer] = useState("");
   const [submittedAnswer, setSubmittedAnswer] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const { userId } = useContext(UserContext);
 
   const router = useRouter();
-  const { day, month, year } = router.query;
+  const { day, month } = router.query;
 
   const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(event.target.value);
@@ -28,7 +35,7 @@ const AnswerInput: React.FC = () => {
         userId!,
         parseInt(day as string),
         parseInt(month as string),
-        parseInt(year as string),
+        currentYear,
         answer
       );
       setSubmittedAnswer(answer);
@@ -40,25 +47,11 @@ const AnswerInput: React.FC = () => {
     }
   };
 
-  const getPostUrl = `/api/users/${userId}/posts/${year}/${month}/${day}`;
-
-  const { data, error } = useSWR(
-    userId && router.isReady ? getPostUrl : null,
-    fetcher
-  );
-
-  const isLoadingStoredAnswer = !data && !error;
-
-  useEffect(() => {
-    if (data) {
-      setSubmittedAnswer(data.answer);
-    }
-  }, [data]);
+  const todaysAnswer = submittedAnswer || (storedAnswer && storedAnswer.answer);
 
   return (
     <Flex marginBottom={4} direction="column">
-      {isLoadingStoredAnswer && <Spinner alignSelf="center" />}
-      {!isLoadingStoredAnswer && !submittedAnswer && (
+      {!todaysAnswer && (
         <>
           <Textarea
             disabled={isUploading}
@@ -75,7 +68,9 @@ const AnswerInput: React.FC = () => {
           </Button>
         </>
       )}
-      {!!submittedAnswer && <AnswerDisplay answer={submittedAnswer} />}
+      {!!todaysAnswer && (
+        <AnswerDisplay answer={todaysAnswer} year={currentYear} />
+      )}
     </Flex>
   );
 };

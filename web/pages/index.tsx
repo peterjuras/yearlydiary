@@ -8,13 +8,12 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const date = new Date();
-  const year = date.getFullYear();
   const month = date.getMonth();
   const day = date.getDate();
 
   return {
     redirect: {
-      destination: `/diary/${year}/${month}/${day}`,
+      destination: `/diary/${month}/${day}`,
       permanent: false,
     },
   };
