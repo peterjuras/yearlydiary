@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { storePost } from "../../../../lib-server/db";
+import { storePost } from "../../../../lib/server/db";
 
 export default async function handler(
   req: NextApiRequest,

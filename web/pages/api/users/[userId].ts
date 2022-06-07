@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { updateUser } from "../../../lib-server/db";
+import { updateUser } from "../../../lib/server/db";
 
 export default async function handler(
   req: NextApiRequest,

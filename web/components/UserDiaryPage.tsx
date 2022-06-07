@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import useSWR from "swr";
-import { fetcher } from "../lib-client/fetcher";
+import { fetcher } from "../lib/client/fetcher";
 import { Answer } from "../types/answer";
 import AnswerInput from "./AnswerInput";
 import LoadingSpinner from "./LoadingSpinner";

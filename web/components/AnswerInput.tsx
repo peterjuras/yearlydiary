@@ -1,7 +1,7 @@
 import { Button, Flex, Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent, useContext, useState } from "react";
-import { uploadPost } from "../lib-client/api";
+import { uploadPost } from "../lib/client/api";
 import { Answer } from "../types/answer";
 import AnswerDisplay from "./AnswerDisplay";
 import PublicPostsToggle from "./PublicPostsToggle";

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUserPostsForDay } from "../../../../../../lib-server/db";
-import { questions } from "../../../../../../lib-server/questions";
+import { getUserPostsForDay } from "../../../../../../lib/server/db";
+import { questions } from "../../../../../../lib/server/questions";
 
 export default async function handler(
   req: NextApiRequest,

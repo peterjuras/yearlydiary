@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Switch } from "@chakra-ui/react";
 import { ChangeEvent, useContext, useState } from "react";
-import { updateUser as updateUserApi } from "../lib-client/api";
+import { updateUser as updateUserApi } from "../lib/client/api";
 import { UserContext } from "./UserContext";
 
 const PublicPostsToggle: React.FC = () => {

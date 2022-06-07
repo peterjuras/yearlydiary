@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { fetcher } from "../lib-client/fetcher";
+import { fetcher } from "../lib/client/fetcher";
 import { Answer } from "../types/answer";
 import AllAnswers from "./AllAnswers";
 import LoadingSpinner from "./LoadingSpinner";

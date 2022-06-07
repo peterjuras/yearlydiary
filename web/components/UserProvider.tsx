@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { createUser } from "../lib-client/api";
+import { createUser } from "../lib/client/api";
 import { User } from "../types/user";
 import { UserContext } from "./UserContext";
 
