@@ -4,6 +4,7 @@ import { ChangeEvent, useContext, useState } from "react";
 import { uploadPost } from "../lib-client/api";
 import { Answer } from "../types/answer";
 import AnswerDisplay from "./AnswerDisplay";
+import PublicPostsToggle from "./PublicPostsToggle";
 import { UserContext } from "./UserContext";
 
 interface AnswerInputProps {
@@ -18,7 +19,7 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
   const [answer, setAnswer] = useState("");
   const [submittedAnswer, setSubmittedAnswer] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const { userId } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const router = useRouter();
   const { day, month } = router.query;
@@ -32,7 +33,7 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
 
     try {
       await uploadPost(
-        userId!,
+        user!.userId,
         parseInt(day as string),
         parseInt(month as string),
         currentYear,
@@ -60,8 +61,12 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
             onChange={handleTextareaChange}
             placeholder="Write your text here!"
           />
+          <PublicPostsToggle />
           <Button
-            isLoading={!userId || isUploading}
+            alignSelf="center"
+            marginTop={4}
+            width={200}
+            isLoading={!user || isUploading}
             onClick={handleSaveButtonClick}
           >
             Save
@@ -69,7 +74,10 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
         </>
       )}
       {!!todaysAnswer && (
-        <AnswerDisplay answer={todaysAnswer} year={currentYear} />
+        <>
+          <AnswerDisplay answer={todaysAnswer} year={currentYear} />
+          <PublicPostsToggle />
+        </>
       )}
     </Flex>
   );

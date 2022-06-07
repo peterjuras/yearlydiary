@@ -10,14 +10,14 @@ import QuestionDisplay from "./QuestionDisplay";
 import { UserContext } from "./UserContext";
 
 const UserDiaryPage: React.FC = () => {
-  const { userId } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const router = useRouter();
   const { day, month } = router.query;
   const getPostUrl = `/api/users/${userId}/posts/${month}/${day}`;
 
   const { data, error } = useSWR<{ answers: Answer[]; question: string }>(
-    userId && router.isReady ? getPostUrl : null,
+    user?.userId && router.isReady ? getPostUrl : null,
     fetcher
   );
 
