@@ -1,6 +1,6 @@
-import { questions } from "../../lib-server/questions";
+import { questions } from "../../lib/server/questions";
 
-describe("#questions", () => {
+describe("questions", () => {
   test.each`
     monthText      | month | expectedDays
     ${"January"}   | ${0}  | ${31}

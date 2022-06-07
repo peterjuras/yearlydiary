@@ -1,6 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getPostsForDay } from "../../../../lib/server/db";
 import { questions } from "../../../../lib/server/questions";
+import {
+  sanitizeDay,
+  sanitizeMonth,
+  sanitizeOffset,
+} from "../../../../lib/server/sanitization";
+import {
+  validateDay,
+  validateMonth,
+  validateOffset,
+} from "../../../../lib/server/validation";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,26 +18,38 @@ export default async function handler(
 ) {
   const {
     method,
-    query: { day, month, year, offset },
+    query: { day, month, offset },
   } = req;
 
   switch (method) {
     case "GET":
-      // TODO: Validation
-      const numericDay = parseInt(day as string);
-      const numericMonth = parseInt(month as string);
+      // Validation
+      const issues = [
+        ...validateDay(day),
+        ...validateMonth(month),
+        ...validateOffset(offset),
+      ];
+      if (issues.length) {
+        res.status(400).send(["Bad Request", "", ...issues].join("\n"));
+        break;
+      }
 
-      const question = questions[numericMonth][numericDay];
+      const sanitizedDay = sanitizeDay(day as string);
+      const sanitizedMonth = sanitizeMonth(month as string);
+      const sanitizedOffset = sanitizeOffset(offset as string);
+
+      const question = questions[sanitizedMonth][sanitizedDay];
       const answers = await getPostsForDay(
-        numericDay,
-        numericMonth,
-        parseInt((offset as string) || "0")
+        sanitizedDay,
+        sanitizedMonth,
+        sanitizedOffset
       );
 
       res.json({
         question,
         answers,
       });
+
       break;
     default:
       res.status(400).end();
