@@ -11,7 +11,7 @@ const AllAnswersDiaryPage: React.FC = () => {
 
   const { day, month } = router.query;
 
-  const getAllPostsUrl = `/api/posts/${month}/${day}`;
+  const getAllPostsUrl = `/api/posts/${parseInt(month as string) - 1}/${day}`;
 
   const { data, error } = useSWR<{ answers: Answer[]; question: string }>(
     router.isReady ? getAllPostsUrl : null,

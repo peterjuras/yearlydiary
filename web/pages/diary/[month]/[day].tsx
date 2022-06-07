@@ -7,7 +7,7 @@ import UserProvider from "../../../components/UserProvider";
 const Day: NextPage = () => {
   return (
     <UserProvider>
-      <Flex direction="column" height="100vh">
+      <Flex margin="0 auto" direction="column" height="100vh" maxWidth={800}>
         <Header />
         <Flex direction="column" padding={4} flex={1}>
           <UserDiaryPage />

@@ -14,7 +14,9 @@ const UserDiaryPage: React.FC = () => {
 
   const router = useRouter();
   const { day, month } = router.query;
-  const getPostUrl = `/api/users/${userId}/posts/${month}/${day}`;
+  const getPostUrl = `/api/users/${user?.userId}/posts/${
+    parseInt(month as string) - 1
+  }/${day}`;
 
   const { data, error } = useSWR<{ answers: Answer[]; question: string }>(
     user?.userId && router.isReady ? getPostUrl : null,

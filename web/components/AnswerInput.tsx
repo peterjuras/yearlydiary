@@ -35,7 +35,7 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
       await uploadPost(
         user!.userId,
         parseInt(day as string),
-        parseInt(month as string),
+        parseInt(month as string) - 1,
         currentYear,
         answer
       );

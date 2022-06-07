@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     redirect: {
-      destination: `/diary/${month}/${day}`,
+      destination: `/diary/${month + 1}/${day}`,
       permanent: false,
     },
   };

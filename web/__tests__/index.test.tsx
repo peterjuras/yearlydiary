@@ -8,7 +8,10 @@ describe("Home Page", () => {
     const day = date.getDate();
 
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockReturnValue({ query: { month, day }, isReady: true });
+    useRouter.mockReturnValue({
+      query: { month: month + 1, day },
+      isReady: true,
+    });
   });
 
   it("renders the current date", async () => {
