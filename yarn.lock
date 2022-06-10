@@ -5521,10 +5521,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-slonik@28.1.0:
-  version "28.1.0"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-28.1.0.tgz#1b4f0af8e2275b508d505a399c7ff0f956f329fb"
-  integrity sha512-0VpQXQv+2Nkf30FHMjMC9oeuzMtr7098m7kMSpPi9EWtclPIxluG3jjWREg5tYrXsjCRwWTEwUKhyUyzq/N1mw==
+slonik@28.1.1:
+  version "28.1.1"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-28.1.1.tgz#f4b3df0d41817d51b7286a195f03b4332be23e46"
+  integrity sha512-M02q5vw/aHBvPyeYSK79Os8rZqC28pOvT9Fjh3ZTKp17C0QenDpsp8lZf54EKMWBanzgkjOzoWfY9MGKZD/t2Q==
   dependencies:
     concat-stream "^2.0.0"
     es6-error "^4.1.1"
