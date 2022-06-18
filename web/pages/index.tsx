@@ -1,20 +1,8 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
+import IndexRedirect from "../components/IndexRedirect";
 
 const Home: NextPage = () => {
-  return null;
+  return <IndexRedirect />;
 };
 
 export default Home;
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const date = new Date();
-  const month = date.getMonth();
-  const day = date.getDate();
-
-  return {
-    redirect: {
-      destination: `/diary/${month + 1}/${day}`,
-      permanent: false,
-    },
-  };
-};
