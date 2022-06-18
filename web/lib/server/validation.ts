@@ -1,3 +1,5 @@
+import { addDays } from "date-fns";
+
 export function* validateDay(day: string | string[]): Generator<string> {
   if (Array.isArray(day)) {
     yield "day must be an integer.";
@@ -44,6 +46,33 @@ export function* validateYear(year: string | string[]): Generator<string> {
 
   if (parsedYear < 2022) {
     yield "year must be higher than 2021.";
+  }
+}
+
+/**
+ * Validates that a post can only be submitted for "today".
+ * The implementation is quite generous, to allow multiple timezones.
+ */
+export function* validatePostDate(
+  today: Date,
+  year: number,
+  month: number,
+  day: number
+): Generator<string> {
+  const yesterday = addDays(today, -1);
+  const tomorrow = addDays(today, 1);
+
+  // Allow posts for today, yesterday & tomorrow
+  const validDates = new Set([
+    `${today.getFullYear()}${today.getMonth()}${today.getDate()}`,
+    `${yesterday.getFullYear()}${yesterday.getMonth()}${yesterday.getDate()}`,
+    `${tomorrow.getFullYear()}${tomorrow.getMonth()}${tomorrow.getDate()}`,
+  ]);
+
+  const postDate = `${year}${month}${day}`;
+
+  if (!validDates.has(postDate)) {
+    yield "You can only submit a post for today.";
   }
 }
 

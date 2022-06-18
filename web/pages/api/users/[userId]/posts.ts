@@ -11,6 +11,7 @@ import {
   validateAnswer,
   validateDay,
   validateMonth,
+  validatePostDate,
   validateUserId,
   validateYear,
 } from "../../../../lib/server/validation";
@@ -46,6 +47,19 @@ export default async function handler(
       const sanitizedYear = sanitizeYear(year as string);
       const sanitizedUserId = sanitizeUserId(userId as string);
       const sanitizedAnswer = sanitizeAnswer(answer as string);
+
+      const postIssues = [
+        ...validatePostDate(
+          new Date(),
+          sanitizedYear,
+          sanitizedMonth,
+          sanitizedDay
+        ),
+      ];
+      if (postIssues.length) {
+        res.status(400).send(["Bad Request", "", ...postIssues].join("\n"));
+        break;
+      }
 
       await storePost(
         sanitizedUserId,

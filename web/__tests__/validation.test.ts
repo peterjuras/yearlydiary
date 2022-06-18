@@ -1,8 +1,10 @@
+import { addDays } from "date-fns";
 import {
   validateAnswer,
   validateDay,
   validateMonth,
   validateOffset,
+  validatePostDate,
   validatePublicPosts,
   validateUserId,
   validateYear,
@@ -286,5 +288,129 @@ describe("validation", () => {
         expect(issues[0]).toBe("publicPosts must be a boolean.");
       }
     );
+  });
+
+  describe("postDate", () => {
+    test("should return no issues for a post on the same day", () => {
+      const today = new Date();
+      const postYear = today.getFullYear();
+      const postMonth = today.getMonth();
+      const postDay = today.getDate();
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+      expect(issues).toHaveLength(0);
+    });
+
+    test("should return no issues for a post for yesterday", () => {
+      const today = new Date();
+      const postDate = addDays(today, -1);
+      const postYear = postDate.getFullYear();
+      const postMonth = postDate.getMonth();
+      const postDay = postDate.getDate();
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+      expect(issues).toHaveLength(0);
+    });
+
+    test("should return no issues for a post for tomorrrow", () => {
+      const today = new Date();
+      const postDate = addDays(today, 1);
+      const postYear = postDate.getFullYear();
+      const postMonth = postDate.getMonth();
+      const postDay = postDate.getDate();
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+      expect(issues).toHaveLength(0);
+    });
+
+    test("should return no issues for a post for Dec 31 as yesterday", () => {
+      const today = new Date();
+      today.setFullYear(2022);
+      today.setMonth(0);
+      today.setDate(1);
+
+      const postYear = 2021;
+      const postMonth = 11;
+      const postDay = 31;
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+      expect(issues).toHaveLength(0);
+    });
+
+    describe("Feb 29", () => {
+      test("should return no issues for a post on Feb 29", () => {
+        const today = new Date();
+        today.setFullYear(2020);
+        today.setMonth(1);
+        today.setDate(29);
+
+        const postYear = 2020;
+        const postMonth = 1;
+        const postDay = 29;
+
+        const issues = [
+          ...validatePostDate(today, postYear, postMonth, postDay),
+        ];
+        expect(issues).toHaveLength(0);
+      });
+
+      test("should return no issues for a post for Feb 28", () => {
+        const today = new Date();
+        today.setFullYear(2020);
+        today.setMonth(1);
+        today.setDate(29);
+
+        const postYear = 2020;
+        const postMonth = 1;
+        const postDay = 28;
+
+        const issues = [
+          ...validatePostDate(today, postYear, postMonth, postDay),
+        ];
+        expect(issues).toHaveLength(0);
+      });
+
+      test("should return no issues for a post for Mar 1", () => {
+        const today = new Date();
+        today.setFullYear(2020);
+        today.setMonth(1);
+        today.setDate(29);
+
+        const postYear = 2020;
+        const postMonth = 2;
+        const postDay = 1;
+
+        const issues = [
+          ...validatePostDate(today, postYear, postMonth, postDay),
+        ];
+        expect(issues).toHaveLength(0);
+      });
+    });
+
+    test("should return an issue for the day after tomorrow", () => {
+      const today = new Date();
+      const postDate = addDays(today, 2);
+      const postYear = postDate.getFullYear();
+      const postMonth = postDate.getMonth();
+      const postDay = postDate.getDate();
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toBe("You can only submit a post for today.");
+    });
+
+    test("should return an issue for the day before yesterday", () => {
+      const today = new Date();
+      const postDate = addDays(today, -2);
+      const postYear = postDate.getFullYear();
+      const postMonth = postDate.getMonth();
+      const postDay = postDate.getDate();
+
+      const issues = [...validatePostDate(today, postYear, postMonth, postDay)];
+
+      expect(issues).toHaveLength(1);
+      expect(issues[0]).toBe("You can only submit a post for today.");
+    });
   });
 });
