@@ -8,7 +8,6 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
-    console.log("Running useEffect - user is: ", user);
     async function initializeUser() {
       let newUser: User | undefined;
 
@@ -25,7 +24,6 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       } else {
         // Create a new user
         try {
-          console.log("Creating user");
           newUser = await createUser();
 
           // Store in localStorage
