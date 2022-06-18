@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import TodayDiaryRedirect from "../components/TodayDiaryRedirect";
 
-const Home: NextPage = () => {
+const Diary: NextPage = () => {
   return <TodayDiaryRedirect />;
 };
 
-export default Home;
+export default Diary;

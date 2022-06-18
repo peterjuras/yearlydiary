@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { DAYS, useTime } from "react-time-sync";
 
-const IndexRedirect: React.FC = () => {
+const TodayDiaryRedirect: React.FC = () => {
   const router = useRouter();
   const currentTime = useTime({ interval: DAYS });
 
@@ -23,4 +23,4 @@ const IndexRedirect: React.FC = () => {
   return null;
 };
 
-export default IndexRedirect;
+export default TodayDiaryRedirect;
