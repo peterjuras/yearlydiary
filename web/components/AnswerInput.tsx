@@ -1,6 +1,7 @@
-import { Button, Flex, Textarea } from "@chakra-ui/react";
+import { Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent, useContext, useState } from "react";
+import { DAYS, useTime } from "react-time-sync";
 import { uploadPost } from "../lib/client/api";
 import { Answer } from "../types/answer";
 import AnswerDisplay from "./AnswerDisplay";
@@ -20,9 +21,13 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
   const [submittedAnswer, setSubmittedAnswer] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const { user } = useContext(UserContext);
+  const currentTime = useTime({ interval: DAYS });
+  const currentDate = new Date(currentTime * 1000);
 
   const router = useRouter();
   const { day, month } = router.query;
+  const parsedDay = parseInt(day as string);
+  const parsedMonth = parseInt(month as string) - 1;
 
   const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(event.target.value);
@@ -34,8 +39,8 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
     try {
       await uploadPost(
         user!.userId,
-        parseInt(day as string),
-        parseInt(month as string) - 1,
+        parsedDay,
+        parsedMonth,
         currentYear,
         answer
       );
@@ -50,9 +55,29 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
 
   const todaysAnswer = submittedAnswer || (storedAnswer && storedAnswer.answer);
 
+  const canSubmitAnswer =
+    currentYear === currentDate.getFullYear() &&
+    parsedMonth === currentDate.getMonth() &&
+    parsedDay === currentDate.getDate();
+  let nextAnswerDateFormatted = "";
+  if (!canSubmitAnswer) {
+    const nextAnswerDate = new Date();
+
+    // Hardcode year to leap year to allow display of Feb 29
+    nextAnswerDate.setFullYear(2020);
+
+    nextAnswerDate.setMonth(parsedMonth);
+    nextAnswerDate.setDate(parsedDay);
+
+    nextAnswerDateFormatted = new Intl.DateTimeFormat(undefined, {
+      month: "numeric",
+      day: "numeric",
+    }).format(nextAnswerDate);
+  }
+
   return (
     <Flex marginBottom={4} direction="column">
-      {!todaysAnswer && (
+      {!todaysAnswer && canSubmitAnswer && (
         <>
           <Textarea
             disabled={isUploading}
@@ -72,6 +97,11 @@ const AnswerInput: React.FC<AnswerInputProps> = ({
             Save
           </Button>
         </>
+      )}
+      {!todaysAnswer && !canSubmitAnswer && (
+        <Text>
+          Come back on {nextAnswerDateFormatted} to submit your answer!
+        </Text>
       )}
       {!!todaysAnswer && (
         <>
