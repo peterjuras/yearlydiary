@@ -10,7 +10,7 @@
     "lint:next": "next lint",
     "lint:prettier": "prettier --check .",
     "test": "jest",
-    "test:ci-e2e": "yarn playwright install-deps && yarn playwright test e2e-tests"
+    "test:ci-e2e": "yarn playwright install-deps && yarn playwright install && yarn playwright test e2e-tests"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.0.2",
