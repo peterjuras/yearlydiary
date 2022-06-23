@@ -15,6 +15,7 @@ const customJestConfig = {
     "^@/pages/(.*)$": "<rootDir>/pages/$1",
   },
   testEnvironment: "jest-environment-jsdom",
+  testMatch: ["**/__tests__/**/*.test.ts?(x)"],
   resolver: `${__dirname}/test-utils/custom-resolver.js`,
 };
 
