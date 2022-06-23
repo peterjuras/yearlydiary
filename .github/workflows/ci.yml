@@ -21,7 +21,7 @@ jobs:
       - name: Unit Tests
         run: yarn test --ci
       - name: E2E Tests
-        run: yarn test:ci-e2e
+        run: yarn test:e2e-ci
         working-directory: web
 
   deploy:
