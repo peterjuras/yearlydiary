@@ -18,8 +18,16 @@ jobs:
         run: git diff --exit-code
       - name: Lint
         run: yarn lint
-      - name: Test
+      - name: Unit Tests
         run: yarn test --ci
+      - name: E2E Tests
+        run: yarn test:e2e-ci
+        working-directory: web
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: test-artifacts
+          path: web/test-results
 
   deploy:
     name: Deploy
