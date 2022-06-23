@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("should redirect to today", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("/");
   await page.waitForNavigation();
 
   const today = new Date();
@@ -12,6 +12,6 @@ test("should redirect to today", async ({ page }) => {
 });
 
 test("snapshot test", async ({ page }) => {
-  await page.goto("http://localhost:3000/diary/6/23");
+  await page.goto("/diary/6/23");
   await expect(page).toHaveScreenshot();
 });

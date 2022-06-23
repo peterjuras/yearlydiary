@@ -9,8 +9,10 @@
     "lint": "run-p lint:*",
     "lint:next": "next lint",
     "lint:prettier": "prettier --check .",
+    "setup-e2e-tests": "ts-node -p scripts/setup-e2e-tests.ts",
     "test": "jest",
-    "test:ci-e2e": "yarn playwright install-deps && yarn playwright install && yarn playwright test e2e-tests"
+    "test:e2e": "yarn playwright test e2e-tests",
+    "test:e2e-ci": "yarn playwright install-deps && yarn playwright install && yarn playwright test e2e-tests"
   },
   "dependencies": {
     "@chakra-ui/icons": "2.0.2",
@@ -40,10 +42,12 @@
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "8.5.0",
+    "execa": "5.1.1",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
+    "ts-node": "10.8.1",
     "typescript": "4.7.4"
   }
 }
