@@ -13,5 +13,7 @@ test("should redirect to today", async ({ page }) => {
 
 test("snapshot test", async ({ page }) => {
   await page.goto("/diary/6/23");
-  await expect(page).toHaveScreenshot();
+  await expect(page).toHaveScreenshot({
+    timeout: 10000,
+  });
 });
