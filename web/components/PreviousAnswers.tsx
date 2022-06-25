@@ -16,7 +16,7 @@ const PreviousAnswers: React.FC<PreviousAnswersProps> = ({ answers }) => {
     <Flex marginTop={5} direction="column">
       <Divider />
       {!answers.length && (
-        <Text marginTop={5}>You don&apos;t have a previous answers yet</Text>
+        <Text marginTop={5}>You don&apos;t have any previous answers yet</Text>
       )}
       {answers.map(({ answer, year }) => (
         <AnswerDisplay key={year} answer={answer} year={year} />
