@@ -1,15 +1,27 @@
 import { Divider, Flex, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { CloseIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  CloseIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CalendarIcon,
+} from "@chakra-ui/icons";
 import Link from "next/link";
 import { addDays } from "date-fns";
 
 interface HeaderProps {
   routeSuffix?: string;
   closeRoute?: string;
+  hideDayNavigation?: boolean;
+  hideCalendar?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ closeRoute, routeSuffix }) => {
+const Header: React.FC<HeaderProps> = ({
+  closeRoute,
+  hideDayNavigation,
+  hideCalendar,
+  routeSuffix,
+}) => {
   const router = useRouter();
   const { day, month } = router.query;
 
@@ -21,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ closeRoute, routeSuffix }) => {
   let nextMonth = "";
   let nextDay = "";
 
-  if (router.isReady && day && month) {
+  if (router.isReady && !hideDayNavigation && day && month) {
     const date = new Date();
     // Hardcode a leap year, to allow navigation to Feb 29
     date.setFullYear(2020);
@@ -45,27 +57,44 @@ const Header: React.FC<HeaderProps> = ({ closeRoute, routeSuffix }) => {
   }
 
   return (
-    <Flex paddingTop={2} align="center" justify="center" direction="column">
+    <Flex
+      position="relative"
+      paddingTop={2}
+      align="center"
+      justify="center"
+      direction="column"
+    >
       <Flex alignItems="center">
-        <Link
-          href={
-            router.isReady
-              ? `/diary/${previousMonth}/${previousDay}${routeSuffix ?? ""}`
-              : "/"
-          }
-        >
-          <ChevronLeftIcon boxSize={7} />
-        </Link>
-        <Text>{displayedDate}</Text>
-        <Link
-          href={
-            router.isReady
-              ? `/diary/${nextMonth}/${nextDay}${routeSuffix ?? ""}`
-              : "/"
-          }
-        >
-          <ChevronRightIcon boxSize={7} />
-        </Link>
+        {!hideCalendar && (
+          <Link href="/calendar">
+            <CalendarIcon boxSize={5} position="absolute" left={3} top={3} />
+          </Link>
+        )}
+        {hideDayNavigation ? (
+          <Text marginBottom={2}>yearlydiary</Text>
+        ) : (
+          <>
+            <Link
+              href={
+                router.isReady
+                  ? `/diary/${previousMonth}/${previousDay}${routeSuffix ?? ""}`
+                  : "/"
+              }
+            >
+              <ChevronLeftIcon boxSize={7} />
+            </Link>
+            <Text>{displayedDate}</Text>
+            <Link
+              href={
+                router.isReady
+                  ? `/diary/${nextMonth}/${nextDay}${routeSuffix ?? ""}`
+                  : "/"
+              }
+            >
+              <ChevronRightIcon boxSize={7} />
+            </Link>
+          </>
+        )}
       </Flex>
       {!!closeRoute && (
         <Link href={closeRoute}>
