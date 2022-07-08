@@ -1,5 +1,6 @@
 import { createPool, sql } from "slonik";
 import { v4 as uuid } from "uuid";
+import { PostDates } from "../../types/post-dates";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Environment variable DATABASE_URL must be defined");
@@ -91,4 +92,22 @@ export async function getPostsForDay(
   `);
 
   return results.rows;
+}
+
+export async function getPostDatesForUser(userId: string): Promise<PostDates> {
+  const results = await db.query<{ month: number; day: number }>(sql`
+  SELECT DISTINCT MONTH, DAY FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
+  WHERE
+  USERS.USER_ID = ${userId}
+  `);
+
+  const postDates = results.rows.reduce<PostDates>((acc, { month, day }) => {
+    if (!acc[month]) {
+      acc[month] = [];
+    }
+    acc[month].push(day);
+    return acc;
+  }, {});
+
+  return postDates;
 }
