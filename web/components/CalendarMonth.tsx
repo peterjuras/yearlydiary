@@ -6,14 +6,17 @@ interface CalendarMonthProps {
   month: number;
   numberOfDays: number;
   monthLabel: string;
+  postDates?: number[];
 }
 
 const CalendarMonth: React.FC<CalendarMonthProps> = ({
   month,
   numberOfDays,
   monthLabel,
+  postDates,
 }) => {
   const router = useRouter();
+  const postDatesSet = new Set(postDates);
 
   const currentTime = useTime({ interval: DAYS });
   const todayDate = new Date(currentTime * 1000);
@@ -31,6 +34,8 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({
     let colorScheme;
     if (isToday) {
       colorScheme = "blue";
+    } else if (postDatesSet.has(currentDay)) {
+      colorScheme = "teal";
     }
 
     return (
