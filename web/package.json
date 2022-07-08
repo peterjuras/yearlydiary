@@ -9,6 +9,7 @@
     "lint": "run-p lint:*",
     "lint:next": "next lint",
     "lint:prettier": "prettier --check .",
+    "lint:tsc": "tsc",
     "setup-e2e-tests": "ts-node -p scripts/setup-e2e-tests.ts",
     "test": "jest",
     "test:e2e": "yarn playwright test e2e-tests",
