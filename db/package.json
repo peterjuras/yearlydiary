@@ -18,12 +18,29 @@
     "promise-retry": "2.0.1",
     "rimraf": "3.0.2",
     "ts-jest": "28.0.5",
+    "tsc-files": "1.1.3",
     "typescript": "4.7.4"
   },
   "files": [
     "build/"
   ],
   "license": "MIT",
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint"
+    ],
+    "*.ts": [
+      "prettier --write",
+      "eslint",
+      "tsc-files"
+    ],
+    "*.tsx": [
+      "prettier --write",
+      "eslint",
+      "tsc-files"
+    ]
+  },
   "private": true,
   "scripts": {
     "bootstrap-db": "yarn build && node build/bootstrap-database",

@@ -8,12 +8,17 @@
   "scripts": {
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
-    "build": "yarn workspaces run build"
+    "build": "yarn workspaces run build",
+    "postinstall": "husky install"
   },
   "workspaces": {
     "packages": [
       "db",
       "web"
     ]
+  },
+  "devDependencies": {
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3"
   }
 }
