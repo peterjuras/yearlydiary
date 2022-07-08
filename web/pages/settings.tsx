@@ -6,7 +6,7 @@ import UserProvider from "../components/UserProvider";
 
 const SettingsPage: NextPage = () => {
   return (
-    <UserProvider>
+    <UserProvider disableAutomaticUserCreation>
       <Flex margin="0 auto" direction="column" height="100vh" maxWidth={800}>
         <Header closeRoute="/" hideDayNavigation />
         <Flex direction="column" padding={4} flex={1}>
