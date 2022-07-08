@@ -25,7 +25,11 @@ const Settings: React.FC = () => {
 
   return (
     <Flex justify="center" direction="column">
-      <Button disabled={!user?.userId || isBusy} onClick={onDeleteDataClick}>
+      <Button
+        disabled={!user?.userId || isBusy}
+        colorScheme="red"
+        onClick={onDeleteDataClick}
+      >
         Delete all data
       </Button>
       {showDeleteConfirmation && (
