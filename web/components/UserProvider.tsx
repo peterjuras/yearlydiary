@@ -3,7 +3,16 @@ import { createUser } from "../lib/client/api";
 import { User } from "../types/user";
 import { UserContext } from "./UserContext";
 
-const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+interface UserProviderProps extends PropsWithChildren {
+  disableAutomaticUserCreation?: boolean;
+}
+
+const LOCALSTORAGE_USER_KEY = "user";
+
+const UserProvider: React.FC<UserProviderProps> = ({
+  children,
+  disableAutomaticUserCreation,
+}) => {
   const [user, setUser] = useState<User | undefined>();
   const [error, setError] = useState<string | undefined>();
 
@@ -17,17 +26,17 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       }
 
       // Parse and store userId from URL query
-      const locallyStoredUser = localStorage.getItem("user");
+      const locallyStoredUser = localStorage.getItem(LOCALSTORAGE_USER_KEY);
       // Read userId from localStorage
       if (locallyStoredUser) {
         newUser = JSON.parse(locallyStoredUser);
-      } else {
+      } else if (!disableAutomaticUserCreation) {
         // Create a new user
         try {
           newUser = await createUser();
 
           // Store in localStorage
-          localStorage.setItem("user", JSON.stringify(newUser));
+          localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(newUser));
         } catch (error: unknown) {
           setError(
             "An error occurred. Please refresh the page or try again later."
@@ -39,11 +48,16 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       setUser(newUser);
     }
     initializeUser();
-  }, [user]);
+  }, [user, disableAutomaticUserCreation]);
 
   function updateUser(user: User) {
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(user));
+  }
+
+  function clearUser() {
+    setUser(undefined);
+    localStorage.removeItem(LOCALSTORAGE_USER_KEY);
   }
 
   return (
@@ -52,6 +66,7 @@ const UserProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         user,
         error,
         updateUser,
+        clearUser,
       }}
     >
       {children}

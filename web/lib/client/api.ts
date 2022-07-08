@@ -54,3 +54,16 @@ export async function uploadPost(
     throw new Error(errorText);
   }
 }
+
+export async function deleteUserData(userId: string) {
+  const deleteUserUrl = `/api/users/${userId}`;
+
+  const response = await fetch(deleteUserUrl, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+}
