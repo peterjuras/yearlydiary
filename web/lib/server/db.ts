@@ -92,3 +92,9 @@ export async function getPostsForDay(
 
   return results.rows;
 }
+
+export async function deleteUser(userId: string) {
+  await db.query(sql`
+    DELETE FROM USERS WHERE USER_ID = ${userId}
+  `);
+}
