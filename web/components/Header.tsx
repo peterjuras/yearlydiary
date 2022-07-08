@@ -5,6 +5,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   CalendarIcon,
+  SettingsIcon,
 } from "@chakra-ui/icons";
 import Link from "next/link";
 import { addDays } from "date-fns";
@@ -96,9 +97,13 @@ const Header: React.FC<HeaderProps> = ({
           </>
         )}
       </Flex>
-      {!!closeRoute && (
+      {closeRoute ? (
         <Link href={closeRoute}>
           <CloseIcon boxSize={4} position="absolute" right={3} top={3} />
+        </Link>
+      ) : (
+        <Link href="/settings">
+          <SettingsIcon boxSize={5} position="absolute" right={3} top={3} />
         </Link>
       )}
       <Divider />
