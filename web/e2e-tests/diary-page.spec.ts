@@ -25,6 +25,8 @@ test.beforeEach(async ({ context }) => {
 
 test("should redirect to today", async ({ page }) => {
   await page.goto("/");
+
+  await page.waitForNavigation();
   await page.waitForNavigation();
 
   expect(page.url()).toContain("/diary/6/23");

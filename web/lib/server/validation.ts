@@ -1,7 +1,9 @@
 import { addDays } from "date-fns";
 
-export function* validateDay(day: string | string[]): Generator<string> {
-  if (Array.isArray(day)) {
+export function* validateDay(
+  day: string | string[] | undefined
+): Generator<string> {
+  if (typeof day === "undefined" || Array.isArray(day)) {
     yield "day must be an integer.";
     return;
   }
@@ -17,8 +19,10 @@ export function* validateDay(day: string | string[]): Generator<string> {
   }
 }
 
-export function* validateMonth(month: string | string[]): Generator<string> {
-  if (Array.isArray(month)) {
+export function* validateMonth(
+  month: string | string[] | undefined
+): Generator<string> {
+  if (typeof month === "undefined" || Array.isArray(month)) {
     yield "month must be an integer.";
     return;
   }
@@ -33,8 +37,10 @@ export function* validateMonth(month: string | string[]): Generator<string> {
   }
 }
 
-export function* validateYear(year: string | string[]): Generator<string> {
-  if (Array.isArray(year)) {
+export function* validateYear(
+  year: string | string[] | undefined
+): Generator<string> {
+  if (typeof year === "undefined" || Array.isArray(year)) {
     yield "year must be an integer.";
     return;
   }
@@ -98,7 +104,9 @@ export function* validateOffset(
   }
 }
 
-export function* validateUserId(userId: string | string[]): Generator<string> {
+export function* validateUserId(
+  userId: string | string[] | undefined
+): Generator<string> {
   if (typeof userId !== "string") {
     yield "userId must be a string.";
     return;
