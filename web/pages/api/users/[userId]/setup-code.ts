@@ -7,7 +7,7 @@ import {
 } from "../../../../lib/server/setup-codes";
 import { validateUserId } from "../../../../lib/server/validation";
 
-async function postHandler(req: NextApiRequest, res: NextApiResponse) {
+async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { userId },
   } = req;
@@ -38,8 +38,8 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
-    case "POST":
-      await postHandler(req, res);
+    case "GET":
+      await getHandler(req, res);
       break;
     default:
       res.status(400).end();

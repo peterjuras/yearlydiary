@@ -11,6 +11,7 @@ import { FaGithub } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { deleteUserData } from "../lib/client/api";
 import { UserContext } from "./UserContext";
+import SettingsSetup from "./SettingsSetup";
 
 const Settings: React.FC = () => {
   const { user, clearUser } = useContext(UserContext);
@@ -58,6 +59,11 @@ const Settings: React.FC = () => {
 
   return (
     <Flex justify="center" align="center" direction="column">
+      <Text alignSelf="flex-start" fontSize="sm">
+        Multiple devices
+      </Text>
+      <Divider marginTop={2} marginBottom={2} />
+      <SettingsSetup />
       <Text alignSelf="flex-start" fontSize="sm">
         Manage your account
       </Text>
