@@ -143,3 +143,20 @@ export async function getUserPosts(
 
   return result.rows;
 }
+
+export async function insertSetupCode(
+  userId: string,
+  code: string,
+  expiryDate: Date
+) {
+  await db.query(sql`
+    INSERT INTO SETUP_CODES
+    (USER_ID, CODE, EXPIRES_AT)
+    VALUES
+    (
+      (SELECT ID FROM USERS WHERE USER_ID = ${userId}),
+      ${code},
+      TO_TIMESTAMP(${expiryDate.getTime() / 1000})
+    )
+  `);
+}
