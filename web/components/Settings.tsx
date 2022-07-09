@@ -18,6 +18,9 @@ const Settings: React.FC = () => {
   const [isBusy, setIsBusy] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
+  const downloadDataUrl = `/api/users/${user?.userId}/download-data`;
+  const buttonsDisabled = !user?.userId || isBusy;
+
   async function onDeleteDataClick() {
     try {
       setIsBusy(true);
@@ -32,14 +35,36 @@ const Settings: React.FC = () => {
     }
   }
 
+  const downloadButton = (
+    <Button
+      disabled={buttonsDisabled}
+      marginTop={5}
+      marginBottom={5}
+      width={200}
+    >
+      Download all data
+    </Button>
+  );
+  let downloadButtonContainer;
+  if (buttonsDisabled) {
+    downloadButtonContainer = downloadButton;
+  } else {
+    downloadButtonContainer = (
+      <LinkBox>
+        <LinkOverlay href={downloadDataUrl}>{downloadButton}</LinkOverlay>
+      </LinkBox>
+    );
+  }
+
   return (
     <Flex justify="center" align="center" direction="column">
       <Text alignSelf="flex-start" fontSize="sm">
         Manage your account
       </Text>
       <Divider marginTop={2} marginBottom={2} />
+      {downloadButtonContainer}
       <Button
-        disabled={!user?.userId || isBusy}
+        disabled={buttonsDisabled}
         colorScheme="red"
         width={200}
         onClick={onDeleteDataClick}
