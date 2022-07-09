@@ -41,6 +41,7 @@
     "next": "12.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "4.4.0",
     "react-time-sync": "5.2.1",
     "slonik": "28.1.1",
     "swr": "1.3.0",
