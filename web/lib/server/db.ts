@@ -1,6 +1,8 @@
 import { createPool, sql } from "slonik";
 import { v4 as uuid } from "uuid";
 import { PostDates } from "../../types/post-dates";
+import { UserEntryRow } from "../../types/user-entry-row";
+import { UserPostRow } from "../../types/user-post-row";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Environment variable DATABASE_URL must be defined");
@@ -116,4 +118,28 @@ export async function deleteUser(userId: string) {
   await db.query(sql`
     DELETE FROM USERS WHERE USER_ID = ${userId}
   `);
+}
+
+export async function getUserEntry(userId: string): Promise<UserEntryRow> {
+  const result = await db.one<UserEntryRow>(sql`
+  SELECT USER_ID, PUBLIC_POSTS, CREATED_AT FROM USERS WHERE USER_ID = ${userId}
+  `);
+
+  return result;
+}
+
+export async function getUserPosts(
+  userId: string,
+  offset: number,
+  limit: number
+): Promise<readonly UserPostRow[]> {
+  const result = await db.query<UserPostRow>(sql`
+  SELECT DAY, MONTH, YEAR, ANSWER, POSTS.CREATED_AT FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
+  WHERE
+  USERS.USER_ID = ${userId}
+  LIMIT ${limit}
+  OFFSET ${offset}
+  `);
+
+  return result.rows;
 }
