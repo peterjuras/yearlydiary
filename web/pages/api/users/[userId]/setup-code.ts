@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { insertSetupCode } from "../../../../lib/server/db";
-import { downloadData } from "../../../../lib/server/download-data";
 import { sanitizeUserId } from "../../../../lib/server/sanitization";
 import {
   generateCode,

@@ -141,3 +141,20 @@ export function* validatePublicPosts(publicPosts: boolean): Generator<string> {
     yield "publicPosts must be a boolean.";
   }
 }
+
+export function* validateSetupCode(
+  setupCode: string | string[] | undefined
+): Generator<string> {
+  if (typeof setupCode !== "string") {
+    yield "setupCode must be a string.";
+    return;
+  }
+
+  if (Number.isNaN(Number(setupCode))) {
+    yield "setupCode must be an integer string";
+  }
+
+  if (setupCode.length !== 4) {
+    yield "setupCode must be exactly 4 characters long";
+  }
+}
