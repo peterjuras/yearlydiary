@@ -143,3 +143,33 @@ export async function getUserPosts(
 
   return result.rows;
 }
+
+export async function insertSetupCode(
+  userId: string,
+  code: string,
+  expiryDate: Date
+) {
+  await db.query(sql`
+    INSERT INTO SETUP_CODES
+    (USER_ID, CODE, EXPIRES_AT)
+    VALUES
+    (
+      (SELECT ID FROM USERS WHERE USER_ID = ${userId}),
+      ${code},
+      TO_TIMESTAMP(${expiryDate.getTime() / 1000})
+    )
+  `);
+}
+
+export async function getUserInfoFromSetupCode(setupCode: string) {
+  const result = await db.maybeOne<{
+    user_id: string;
+    public_posts: boolean;
+  }>(sql`
+    SELECT USERS.USER_ID, PUBLIC_POSTS FROM USERS JOIN SETUP_CODES
+    ON USERS.ID = SETUP_CODES.USER_ID
+    WHERE CODE = ${setupCode} AND
+    EXPIRES_AT > NOW()
+  `);
+  return result;
+}
