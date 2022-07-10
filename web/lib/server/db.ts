@@ -162,7 +162,10 @@ export async function insertSetupCode(
 }
 
 export async function getUserInfoFromSetupCode(setupCode: string) {
-  const result = await db.maybeOne(sql`
+  const result = await db.maybeOne<{
+    user_id: string;
+    public_posts: boolean;
+  }>(sql`
     SELECT USERS.USER_ID, PUBLIC_POSTS FROM USERS JOIN SETUP_CODES
     ON USERS.ID = SETUP_CODES.USER_ID
     WHERE CODE = ${setupCode} AND

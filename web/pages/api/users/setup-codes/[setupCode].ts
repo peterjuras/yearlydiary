@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getUserInfoFromSetupCode } from "../../../../lib/server/db";
 import { validateSetupCode } from "../../../../lib/server/validation";
+import { User } from "../../../../types/user";
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   const {
@@ -16,12 +17,18 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   // No sanitization needed after validation
   const sanitizedSetupCode = setupCode as string;
 
-  const userInfo = await getUserInfoFromSetupCode(sanitizedSetupCode);
+  const userInfoRaw = await getUserInfoFromSetupCode(sanitizedSetupCode);
 
-  if (!userInfo) {
+  if (!userInfoRaw) {
     res.status(400).send("Bad Request");
     return;
   }
+
+  const userInfo: User = {
+    userId: userInfoRaw.user_id,
+    publicPosts: userInfoRaw.public_posts,
+  };
+
   res.json(userInfo);
 }
 
