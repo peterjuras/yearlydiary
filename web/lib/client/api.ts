@@ -67,3 +67,20 @@ export async function deleteUserData(userId: string) {
     throw new Error(errorText);
   }
 }
+
+export async function getUserInfoFromSetupCode(
+  setupCode: string
+): Promise<User> {
+  const getUserInfoUrl = `/api/users/setup-codes/${setupCode}`;
+
+  const response = await fetch(getUserInfoUrl);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+
+  const result = await response.json();
+
+  return result;
+}
