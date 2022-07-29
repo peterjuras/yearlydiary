@@ -5966,10 +5966,10 @@ slice-ansi@^5.0.0:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
 
-slonik@28.2.0:
-  version "28.2.0"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-28.2.0.tgz#d00ab327d037a044767165836a0cdcb9d91c2ae1"
-  integrity sha512-hAjkmn54adXek1LJUs43BQg1m0e5aysZVEAGg1b72mgPvRahS+os6CLtwUyaVGR2fyix+m9Gb2ySUHpAzpTuTQ==
+slonik@29.0.0:
+  version "29.0.0"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-29.0.0.tgz#96099d2c76ae06bf52c2d1652bb3d6b0bf5ba2b6"
+  integrity sha512-jWVj0h9kSeywwzFtrTDaB+OS1TKlo5AesjoL53IUdy/bnhVP40HWk0dKvKuDWJdEH5cbK3/VeCZODNEUET8ycA==
   dependencies:
     concat-stream "^2.0.0"
     es6-error "^4.1.1"
