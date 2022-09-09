@@ -1201,10 +1201,10 @@
     unquoted-property-validator "1.1.0"
     wrap-ansi "7.0.0"
 
-"@coat/template-ts-package@0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@coat/template-ts-package/-/template-ts-package-0.0.40.tgz#2791e795bfe60ba74964f479955ab520a10cd7cd"
-  integrity sha512-v7eTsKarJZAVc3imRmJj2sAoQL9O8Pbz0e0OvITcxRpxo1a7KeBXs7/rry6RRGCSoez+Z9hnc2UMMShsF2Z/kQ==
+"@coat/template-ts-package@0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@coat/template-ts-package/-/template-ts-package-0.0.42.tgz#a0feac7331f3d3d53395c298c4ba3c619406ddcb"
+  integrity sha512-ScocHcIQUg42K9vP/psyQk8O3cb04bsY8sFYptFjPyKWFGSGJxKEDnR5W28TiQiLBwl+rD/jwW2iZZc1rn9zVA==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
