@@ -1,4 +1,5 @@
 export interface UserPostRow {
+  [key: string]: UserPostRow[keyof UserPostRow];
   day: number;
   month: number;
   year: number;
