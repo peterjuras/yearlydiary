@@ -326,8 +326,8 @@ describe("validation", () => {
     test("should return no issues for a post for Dec 31 as yesterday", () => {
       const today = new Date();
       today.setFullYear(2022);
-      today.setMonth(0);
       today.setDate(1);
+      today.setMonth(0);
 
       const postYear = 2021;
       const postMonth = 11;
@@ -341,8 +341,8 @@ describe("validation", () => {
       test("should return no issues for a post on Feb 29", () => {
         const today = new Date();
         today.setFullYear(2020);
-        today.setMonth(1);
         today.setDate(29);
+        today.setMonth(1);
 
         const postYear = 2020;
         const postMonth = 1;
@@ -357,8 +357,8 @@ describe("validation", () => {
       test("should return no issues for a post for Feb 28", () => {
         const today = new Date();
         today.setFullYear(2020);
-        today.setMonth(1);
         today.setDate(29);
+        today.setMonth(1);
 
         const postYear = 2020;
         const postMonth = 1;
@@ -373,8 +373,8 @@ describe("validation", () => {
       test("should return no issues for a post for Mar 1", () => {
         const today = new Date();
         today.setFullYear(2020);
-        today.setMonth(1);
         today.setDate(29);
+        today.setMonth(1);
 
         const postYear = 2020;
         const postMonth = 2;
