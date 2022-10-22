@@ -6472,10 +6472,10 @@ slice-ansi@^5.0.0:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
 
-slonik@31.4.2:
-  version "31.4.2"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-31.4.2.tgz#6b0152b35e487ffdf04a0fe5d5fef1f27de16c9c"
-  integrity sha512-WO6xHzOTj+h8qhW3gZHcsUVI3cPYg/MaktNvF6hUkoOSdHqcEp8ZnIX+yrbr5pOpNowykYrSWv2ccICvgp/07A==
+slonik@32.0.0:
+  version "32.0.0"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-32.0.0.tgz#2b6b4d421db11ef3086d2b048e9c234f551f1eee"
+  integrity sha512-O3t0taI5T0bcVuFimMyUACH2sB//JyaVonjg0rfvu9dmumfFbIVOZBdKWsT1H1NWAX5mpEIQcYjwJ24nH/xAHw==
   dependencies:
     concat-stream "^2.0.0"
     es6-error "^4.1.1"
