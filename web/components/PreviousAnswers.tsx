@@ -22,8 +22,8 @@ const PreviousAnswers: React.FC<PreviousAnswersProps> = ({ answers }) => {
         <AnswerDisplay key={year} answer={answer} year={year} />
       ))}
       <Text marginTop={5}>Check out what others have answered today!</Text>
-      <Link href={`/diary/${month}/${day}/all`}>
-        <Button alignSelf="center" width={200} marginTop={5}>
+      <Link style={{ alignSelf: "center" }} href={`/diary/${month}/${day}/all`}>
+        <Button width={200} marginTop={5}>
           See other answers
         </Button>
       </Link>
