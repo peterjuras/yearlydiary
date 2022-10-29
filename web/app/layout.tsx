@@ -1,16 +1,15 @@
-import type { AppProps } from "next/app";
+"use-client";
+
 import { ChakraProvider } from "@chakra-ui/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ children }: { children: any }) {
   return (
     <html lang="en">
       <head>
         <title>Yearlydiary</title>
       </head>
       <body>
-        <ChakraProvider resetCSS>
-          <Component {...pageProps} />
-        </ChakraProvider>
+        <ChakraProvider resetCSS>{children}</ChakraProvider>
       </body>
     </html>
   );

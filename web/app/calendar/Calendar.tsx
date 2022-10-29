@@ -1,24 +1,22 @@
 import { Flex } from "@chakra-ui/react";
-import { useContext } from "react";
-import useSWR from "swr";
-import { fetcher } from "../lib/client/fetcher";
-import { PostDates } from "../types/post-dates";
+import { cookies } from "next/headers";
+import { PostDates } from "../../types/post-dates";
 import CalendarMonth from "./CalendarMonth";
-import { UserContext } from "./UserContext";
 
 const monthNumberOfDays: number[] = [
   31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
 ];
 
-const Calendar: React.FC = () => {
-  const { user } = useContext(UserContext);
+const Calendar = async () => {
+  const userId = cookies().get("userId");
 
-  const getPostDatesUrl = `/api/users/${user?.userId}/posts`;
+  let data: { postDates: PostDates };
 
-  const { data } = useSWR<{ postDates: PostDates }>(
-    user?.userId ? getPostDatesUrl : null,
-    fetcher
-  );
+  if (userId) {
+    const getPostDatesUrl = `/api/users/${userId}/posts`;
+    const response = await fetch(getPostDatesUrl);
+    data = await response.json();
+  }
 
   const monthViews = monthNumberOfDays.map((numberOfDays, month) => {
     const monthDate = new Date();
