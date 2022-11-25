@@ -1,4 +1,5 @@
 import { createPool, DatabasePool, sql } from "slonik";
+import { z } from "zod";
 import { v4 as uuid } from "uuid";
 import { PostDates } from "../../types/post-dates";
 import { UserEntryRow } from "../../types/user-entry-row";
@@ -27,7 +28,7 @@ export async function createUser(): Promise<{
 
   const db = await getDb();
 
-  await db.query(sql`
+  await db.query(sql.unsafe`
     INSERT INTO USERS
     (USER_ID, PUBLIC_POSTS)
     VALUES
@@ -46,7 +47,7 @@ export async function updateUser(
 ): Promise<void> {
   const db = await getDb();
 
-  await db.query(sql`
+  await db.query(sql.unsafe`
   UPDATE USERS
   SET PUBLIC_POSTS = ${publicPosts}
   WHERE USER_ID = ${userId}
@@ -62,7 +63,7 @@ export async function storePost(
 ): Promise<void> {
   const db = await getDb();
 
-  await db.query(sql`
+  await db.query(sql.unsafe`
     INSERT INTO POSTS
     (USER_ID, DAY, MONTH, YEAR, ANSWER)
     VALUES (
@@ -79,7 +80,13 @@ export async function getUserPostsForDay(
 ): Promise<Readonly<{ answer: string; year: number }[]>> {
   const db = await getDb();
 
-  const result = await db.query<{ answer: string; year: number }>(sql`
+  const result = await db.query(
+    sql.type(
+      z.object({
+        answer: z.string(),
+        year: z.number(),
+      })
+    )`
   SELECT ANSWER, YEAR FROM POSTS
   WHERE
   USER_ID = (SELECT ID FROM USERS WHERE USER_ID = ${userId})
@@ -87,7 +94,8 @@ export async function getUserPostsForDay(
   DAY = ${day} AND
   MONTH = ${month}
   ORDER BY YEAR DESC
-  `);
+  `
+  );
 
   return result.rows;
 }
@@ -99,7 +107,12 @@ export async function getPostsForDay(
 ): Promise<Readonly<{ answer: string }[]>> {
   const db = await getDb();
 
-  const results = await db.query<{ answer: string }>(sql`
+  const results = await db.query(sql.type(
+    z.object({
+      answer: z.string(),
+      year: z.number(),
+    })
+  )`
   SELECT ANSWER, YEAR FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
   PUBLIC_POSTS = TRUE AND
@@ -116,7 +129,12 @@ export async function getPostsForDay(
 export async function getPostDatesForUser(userId: string): Promise<PostDates> {
   const db = await getDb();
 
-  const results = await db.query<{ month: number; day: number }>(sql`
+  const results = await db.query(sql.type(
+    z.object({
+      month: z.number(),
+      day: z.number(),
+    })
+  )`
   SELECT DISTINCT MONTH, DAY FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
   USERS.USER_ID = ${userId}
@@ -136,15 +154,21 @@ export async function getPostDatesForUser(userId: string): Promise<PostDates> {
 export async function deleteUser(userId: string) {
   const db = await getDb();
 
-  await db.query(sql`
+  await db.query(sql.unsafe`
     DELETE FROM USERS WHERE USER_ID = ${userId}
   `);
 }
 
-export async function getUserEntry(userId: string): Promise<UserEntryRow> {
+export async function getUserEntry(userId: string) {
   const db = await getDb();
 
-  const result = await db.one<UserEntryRow>(sql`
+  const result = await db.one(sql.type(
+    z.object({
+      user_id: z.string(),
+      public_posts: z.boolean(),
+      created_at: z.number(),
+    })
+  )`
   SELECT USER_ID, PUBLIC_POSTS, CREATED_AT FROM USERS WHERE USER_ID = ${userId}
   `);
 
@@ -158,7 +182,15 @@ export async function getUserPosts(
 ): Promise<readonly UserPostRow[]> {
   const db = await getDb();
 
-  const result = await db.query<UserPostRow>(sql`
+  const result = await db.query(sql.type(
+    z.object({
+      day: z.number(),
+      month: z.number(),
+      year: z.number(),
+      answer: z.string(),
+      created_at: z.number(),
+    })
+  )`
   SELECT DAY, MONTH, YEAR, ANSWER, POSTS.CREATED_AT FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
   USERS.USER_ID = ${userId}
@@ -176,7 +208,7 @@ export async function insertSetupCode(
 ) {
   const db = await getDb();
 
-  await db.query(sql`
+  await db.query(sql.unsafe`
     INSERT INTO SETUP_CODES
     (USER_ID, CODE, EXPIRES_AT)
     VALUES
@@ -191,10 +223,12 @@ export async function insertSetupCode(
 export async function getUserInfoFromSetupCode(setupCode: string) {
   const db = await getDb();
 
-  const result = await db.maybeOne<{
-    user_id: string;
-    public_posts: boolean;
-  }>(sql`
+  const result = await db.maybeOne(sql.type(
+    z.object({
+      user_id: z.string(),
+      public_posts: z.boolean(),
+    })
+  )`
     SELECT USERS.USER_ID, PUBLIC_POSTS FROM USERS JOIN SETUP_CODES
     ON USERS.ID = SETUP_CODES.USER_ID
     WHERE CODE = ${setupCode} AND
