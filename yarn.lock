@@ -6496,10 +6496,10 @@ slice-ansi@^5.0.0:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
 
-slonik@32.0.0:
-  version "32.0.0"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-32.0.0.tgz#2b6b4d421db11ef3086d2b048e9c234f551f1eee"
-  integrity sha512-O3t0taI5T0bcVuFimMyUACH2sB//JyaVonjg0rfvu9dmumfFbIVOZBdKWsT1H1NWAX5mpEIQcYjwJ24nH/xAHw==
+slonik@33.0.3:
+  version "33.0.3"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-33.0.3.tgz#66792b99682438d99476018e5a1901e4e8f2e748"
+  integrity sha512-NIgRs/x+dE7u2O0aOsd0AFTmq693/LzqMfAs+Nq+3d1pg1CnyMmqP7Bs94cYMUaL12RboxI1CrHkdn2nfmJ5kQ==
   dependencies:
     concat-stream "^2.0.0"
     es6-error "^4.1.1"
@@ -7393,7 +7393,7 @@ zip-stream@^4.1.0:
     compress-commons "^4.1.0"
     readable-stream "^3.6.0"
 
-zod@^3.19.1:
+zod@3.19.1, zod@^3.19.1:
   version "3.19.1"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.19.1.tgz#112f074a97b50bfc4772d4ad1576814bd8ac4473"
   integrity sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==
