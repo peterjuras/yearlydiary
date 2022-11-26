@@ -2,8 +2,8 @@ import { createPool, DatabasePool, sql } from "slonik";
 import { z } from "zod";
 import { v4 as uuid } from "uuid";
 import { PostDates } from "../../types/post-dates";
-import { UserEntryRow } from "../../types/user-entry-row";
-import { UserPostRow } from "../../types/user-post-row";
+import { User } from "../../types/user";
+import { Answer, answerSchema } from "../../types/answer";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Environment variable DATABASE_URL must be defined");
@@ -19,10 +19,7 @@ async function getDb(): Promise<DatabasePool> {
   return dbPool;
 }
 
-export async function createUser(): Promise<{
-  userId: string;
-  publicPosts: boolean;
-}> {
+export async function createUser(): Promise<User> {
   const newUserId = uuid();
   const publicPosts = true;
 
@@ -77,16 +74,11 @@ export async function getUserPostsForDay(
   userId: string,
   day: number,
   month: number
-): Promise<Readonly<{ answer: string; year: number }[]>> {
+): Promise<Readonly<Answer[]>> {
   const db = await getDb();
 
   const result = await db.query(
-    sql.type(
-      z.object({
-        answer: z.string(),
-        year: z.number(),
-      })
-    )`
+    sql.type(answerSchema)`
   SELECT ANSWER, YEAR FROM POSTS
   WHERE
   USER_ID = (SELECT ID FROM USERS WHERE USER_ID = ${userId})
@@ -179,7 +171,7 @@ export async function getUserPosts(
   userId: string,
   offset: number,
   limit: number
-): Promise<readonly UserPostRow[]> {
+) {
   const db = await getDb();
 
   const result = await db.query(sql.type(
