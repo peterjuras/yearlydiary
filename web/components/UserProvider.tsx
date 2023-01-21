@@ -9,6 +9,14 @@ interface UserProviderProps extends PropsWithChildren {
 
 const LOCALSTORAGE_USER_KEY = "user";
 
+function setCookie(userId: string | undefined) {
+  document.cookie = `userId=${userId}; Max-Age=1735707600`;
+}
+
+function clearCookie() {
+  document.cookie = "userId=; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
 const UserProvider: React.FC<UserProviderProps> = ({
   children,
   disableAutomaticUserCreation,
@@ -30,6 +38,8 @@ const UserProvider: React.FC<UserProviderProps> = ({
       // Read userId from localStorage
       if (locallyStoredUser) {
         newUser = JSON.parse(locallyStoredUser);
+        // Update cookie
+        setCookie(newUser?.userId);
       } else if (!disableAutomaticUserCreation) {
         // Create a new user
         try {
@@ -37,6 +47,8 @@ const UserProvider: React.FC<UserProviderProps> = ({
 
           // Store in localStorage
           localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(newUser));
+          // Store in cookie
+          setCookie(newUser.userId);
         } catch (error: unknown) {
           setError(
             "An error occurred. Please refresh the page or try again later."
@@ -53,11 +65,13 @@ const UserProvider: React.FC<UserProviderProps> = ({
   function updateUser(user: User) {
     setUser(user);
     localStorage.setItem(LOCALSTORAGE_USER_KEY, JSON.stringify(user));
+    setCookie(user.userId);
   }
 
   function clearUser() {
     setUser(undefined);
     localStorage.removeItem(LOCALSTORAGE_USER_KEY);
+    clearCookie();
   }
 
   return (

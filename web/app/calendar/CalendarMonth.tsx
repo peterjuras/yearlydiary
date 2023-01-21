@@ -1,5 +1,7 @@
+"use client";
+
 import { Button, Flex, Text, Wrap, WrapItem } from "@chakra-ui/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { DAYS, useTime } from "react-time-sync";
 
 interface CalendarMonthProps {
@@ -15,6 +17,8 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({
   monthLabel,
   postDates,
 }) => {
+  const router = useRouter();
+
   const postDatesSet = new Set(postDates);
 
   const currentTime = useTime({ interval: DAYS });
@@ -27,7 +31,7 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({
     const isToday = month === todayMonth && currentDay === todayDay;
 
     function onDayButtonClick() {
-      redirect(`/diary/${month + 1}/${currentDay}`);
+      router.push(`/diary/${month + 1}/${currentDay}`);
     }
 
     let colorScheme;

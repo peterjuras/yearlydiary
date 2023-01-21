@@ -1,15 +1,10 @@
-"use-client";
-
-import { ChakraProvider } from "@chakra-ui/react";
+import ClientProviders from "./ClientProviders";
 
 function MyApp({ children }: { children: any }) {
   return (
     <html lang="en">
-      <head>
-        <title>Yearlydiary</title>
-      </head>
       <body>
-        <ChakraProvider resetCSS>{children}</ChakraProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

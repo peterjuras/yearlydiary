@@ -1,21 +1,20 @@
-import { Flex } from "@chakra-ui/react";
-import { cookies } from "next/headers";
-import { PostDates } from "../../types/post-dates";
+import { getPostDatesForUser } from "../../lib/server/db";
+import FlexClient from "../client-wrappers/FlexClient";
 import CalendarMonth from "./CalendarMonth";
 
 const monthNumberOfDays: number[] = [
   31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,
 ];
 
-const Calendar = async () => {
-  const userId = cookies().get("userId");
+type CalendarProps = {
+  postDatesPromise?: ReturnType<typeof getPostDatesForUser>;
+};
 
-  let data: { postDates: PostDates };
+export default async function Calendar({ postDatesPromise }: CalendarProps) {
+  let postDates: Awaited<typeof postDatesPromise>;
 
-  if (userId) {
-    const getPostDatesUrl = `/api/users/${userId}/posts`;
-    const response = await fetch(getPostDatesUrl);
-    data = await response.json();
+  if (postDatesPromise) {
+    postDates = await postDatesPromise;
   }
 
   const monthViews = monthNumberOfDays.map((numberOfDays, month) => {
@@ -29,14 +28,12 @@ const Calendar = async () => {
       <CalendarMonth
         key={month}
         month={month}
-        postDates={data?.postDates?.[month]}
+        postDates={postDates?.[month]}
         monthLabel={monthLabel}
         numberOfDays={numberOfDays}
       />
     );
   });
 
-  return <Flex direction="column">{monthViews}</Flex>;
-};
-
-export default Calendar;
+  return <FlexClient direction="column">{monthViews}</FlexClient>;
+}

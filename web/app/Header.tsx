@@ -1,14 +1,13 @@
-import { Divider, Flex, Text } from "@chakra-ui/react";
-// import { useRouter } from "next/router";
-import {
-  CloseIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  CalendarIcon,
-  SettingsIcon,
-} from "@chakra-ui/icons";
 import Link from "next/link";
 import { addDays } from "date-fns";
+import FlexClient from "./client-wrappers/FlexClient";
+import CalendarIconClient from "./client-wrappers/CalendarIconClient";
+import TextClient from "./client-wrappers/TextClient";
+import ChevronLeftIconClient from "./client-wrappers/ChevronLeftIconClient";
+import ChevronRightIconClient from "./client-wrappers/ChevronRightIconClient";
+import CloseIconClient from "./client-wrappers/CloseIconClient";
+import SettingsIconClient from "./client-wrappers/SettingsIconClient";
+import DividerClient from "./client-wrappers/DividerClient";
 
 interface HeaderProps {
   routeSuffix?: string;
@@ -27,7 +26,6 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   // TODO
   const { day, month } = { day: "5", month: "10" };
-  console.log(params);
 
   let displayedDate = "";
 
@@ -61,21 +59,26 @@ const Header: React.FC<HeaderProps> = ({
   }
 
   return (
-    <Flex
+    <FlexClient
       position="relative"
       paddingTop={2}
       align="center"
       justify="center"
       direction="column"
     >
-      <Flex alignItems="center">
+      <FlexClient alignItems="center">
         {!hideCalendar && (
           <Link href="/calendar">
-            <CalendarIcon boxSize={5} position="absolute" left={3} top={3} />
+            <CalendarIconClient
+              boxSize={5}
+              position="absolute"
+              left={3}
+              top={3}
+            />
           </Link>
         )}
         {hideDayNavigation ? (
-          <Text marginBottom={2}>yearlydiary</Text>
+          <TextClient marginBottom={2}>yearlydiary</TextClient>
         ) : (
           <>
             <Link
@@ -83,26 +86,31 @@ const Header: React.FC<HeaderProps> = ({
                 routeSuffix ?? ""
               }`}
             >
-              <ChevronLeftIcon boxSize={7} />
+              <ChevronLeftIconClient boxSize={7} />
             </Link>
-            <Text>{displayedDate}</Text>
+            <TextClient>{displayedDate}</TextClient>
             <Link href={`/diary/${nextMonth}/${nextDay}${routeSuffix ?? ""}`}>
-              <ChevronRightIcon boxSize={7} />
+              <ChevronRightIconClient boxSize={7} />
             </Link>
           </>
         )}
-      </Flex>
+      </FlexClient>
       {closeRoute ? (
         <Link href={closeRoute}>
-          <CloseIcon boxSize={4} position="absolute" right={3} top={3} />
+          <CloseIconClient boxSize={4} position="absolute" right={3} top={3} />
         </Link>
       ) : (
         <Link href="/settings">
-          <SettingsIcon boxSize={5} position="absolute" right={3} top={3} />
+          <SettingsIconClient
+            boxSize={5}
+            position="absolute"
+            right={3}
+            top={3}
+          />
         </Link>
       )}
-      <Divider />
-    </Flex>
+      <DividerClient />
+    </FlexClient>
   );
 };
 
