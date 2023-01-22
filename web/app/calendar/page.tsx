@@ -17,5 +17,3 @@ export default function CalendarPage() {
     </FlexClient>
   );
 }
-
-export const dynamic = "force-dynamic";

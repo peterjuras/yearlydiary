@@ -26,5 +26,6 @@ export default function DiaryPage({ params }: DiaryPageProps) {
   );
 }
 
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
+// TODO: Necessary until the following issue is fixed:
+// https://github.com/vercel/next.js/issues/45156
+export const revalidate = 0;
