@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPostDatesForUser, storePost } from "../../../../lib/server/db";
+import { createUser, storePost } from "../../lib/server/db";
 import {
   sanitizeAnswer,
   sanitizeDay,
   sanitizeMonth,
   sanitizeUserId,
   sanitizeYear,
-} from "../../../../lib/server/sanitization";
+} from "../../lib/server/sanitization";
+import { updateCookie } from "../../lib/server/update-cookie";
 import {
   validateAnswer,
   validateDay,
@@ -14,35 +15,18 @@ import {
   validatePostDate,
   validateUserId,
   validateYear,
-} from "../../../../lib/server/validation";
-
-async function getHandler(req: NextApiRequest, res: NextApiResponse) {
-  const {
-    query: { userId },
-  } = req;
-
-  const issues = [...validateUserId(userId)];
-  if (issues.length) {
-    res.status(400).send(["Bad Request", "", ...issues].join("\n"));
-    return;
-  }
-
-  const sanitizedUserId = sanitizeUserId(userId as string);
-
-  const userPostDates = await getPostDatesForUser(sanitizedUserId);
-
-  const result = {
-    postDates: userPostDates,
-  };
-
-  res.json(result);
-}
+} from "../../lib/server/validation";
 
 async function postHandler(req: NextApiRequest, res: NextApiResponse) {
   const {
-    query: { userId },
+    cookies: { userId: providedUserId },
     body,
   } = req;
+
+  let userId = providedUserId;
+  if (!userId) {
+    ({ userId } = await createUser());
+  }
 
   const { day, month, year, answer } = JSON.parse(body);
   // Validation
@@ -84,6 +68,9 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     sanitizedYear,
     sanitizedAnswer
   );
+
+  updateCookie(res, sanitizedUserId);
+
   res.status(204).end();
 }
 
@@ -94,9 +81,6 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
-    case "GET":
-      await getHandler(req, res);
-      break;
     case "POST":
       await postHandler(req, res);
       break;

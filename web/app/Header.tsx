@@ -14,7 +14,8 @@ interface HeaderProps {
   closeRoute?: string;
   hideDayNavigation?: boolean;
   hideCalendar?: boolean;
-  params: Record<string, string>;
+  day?: number;
+  month?: number;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,11 +23,9 @@ const Header: React.FC<HeaderProps> = ({
   hideDayNavigation,
   hideCalendar,
   routeSuffix,
-  params,
+  day,
+  month,
 }) => {
-  // TODO
-  const { day, month } = { day: "5", month: "10" };
-
   let displayedDate = "";
 
   let previousMonth = "";
@@ -35,13 +34,13 @@ const Header: React.FC<HeaderProps> = ({
   let nextMonth = "";
   let nextDay = "";
 
-  if (!hideDayNavigation && day && month) {
+  if (!hideDayNavigation && day && typeof month !== "undefined") {
     const date = new Date();
     // Hardcode a leap year, to allow navigation to Feb 29
     date.setFullYear(2020);
 
-    date.setMonth(parseInt(month as string) - 1);
-    date.setDate(parseInt(day as string));
+    date.setMonth(month);
+    date.setDate(day);
 
     displayedDate = new Intl.DateTimeFormat(undefined, {
       month: "numeric",

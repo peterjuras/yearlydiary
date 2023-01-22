@@ -1,16 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { insertSetupCode } from "../../../../lib/server/db";
-import { sanitizeUserId } from "../../../../lib/server/sanitization";
+import { createUser, insertSetupCode } from "../../../lib/server/db";
+import { sanitizeUserId } from "../../../lib/server/sanitization";
 import {
   generateCode,
   generateExpiryDate,
-} from "../../../../lib/server/setup-codes";
-import { validateUserId } from "../../../../lib/server/validation";
+} from "../../../lib/server/setup-codes";
+import { updateCookie } from "../../../lib/server/update-cookie";
+import { validateUserId } from "../../../lib/server/validation";
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   const {
-    query: { userId },
+    cookies: { userId: providedUserId },
   } = req;
+
+  let userId = providedUserId;
+  if (!userId) {
+    ({ userId } = await createUser());
+  }
 
   const issues = [...validateUserId(userId)];
   if (issues.length) {
@@ -24,6 +30,8 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   const expiryDate = generateExpiryDate();
 
   await insertSetupCode(sanitizedUserId, code, expiryDate);
+
+  updateCookie(res, sanitizedUserId);
 
   res.json({
     code,

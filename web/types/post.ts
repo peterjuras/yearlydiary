@@ -1,4 +1,4 @@
-export interface Answer {
+export interface Post {
   year: number;
   answer: string;
 }

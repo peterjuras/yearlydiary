@@ -8,25 +8,23 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { deleteUserData } from "../lib/client/api";
-import { UserContext } from "./UserContext";
+import cookie from "cookie";
 import SettingsSetup from "./SettingsSetup";
 
 const Settings: React.FC = () => {
-  const { user, clearUser } = useContext(UserContext);
-
   const [isBusy, setIsBusy] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
-  const downloadDataUrl = `/api/users/${user?.userId}/download-data`;
-  const buttonsDisabled = !user?.userId || isBusy;
+  const downloadDataUrl = `/api/users/download-data`;
+  const parsedCookies = cookie.parse(document.cookie);
+  const buttonsDisabled = isBusy || !document || !parsedCookies.userId;
 
   async function onDeleteDataClick() {
     try {
       setIsBusy(true);
-      await deleteUserData(user!.userId);
-      clearUser();
+      await deleteUserData();
       setShowDeleteConfirmation(true);
     } catch (error) {
       // TODO: Handle error

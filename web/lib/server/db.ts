@@ -96,10 +96,10 @@ export async function getPostsForDay(
   day: number,
   month: number,
   offset: number
-): Promise<Readonly<{ answer: string }[]>> {
+): Promise<Readonly<{ answer: string; year: number }[]>> {
   const db = await getDb();
 
-  const results = await db.query<{ answer: string }>(sql`
+  const results = await db.query<{ answer: string; year: number }>(sql`
   SELECT ANSWER, YEAR FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
   PUBLIC_POSTS = TRUE AND
@@ -186,6 +186,17 @@ export async function insertSetupCode(
       TO_TIMESTAMP(${expiryDate.getTime() / 1000})
     )
   `);
+}
+
+export async function getUserInfo(userId: string) {
+  const db = await getDb();
+
+  const result = await db.one<{ public_posts: boolean }>(sql`
+    SELECT PUBLIC_POSTS FROM USERS
+    WHERE USER_ID = ${userId}
+  `);
+
+  return result;
 }
 
 export async function getUserInfoFromSetupCode(setupCode: string) {

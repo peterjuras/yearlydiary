@@ -15,7 +15,7 @@ const CalendarPage: NextPage<CalendarPageProps> = ({ params }) => {
       height="100vh"
       maxWidth={800}
     >
-      <Header hideCalendar closeRoute="/" hideDayNavigation params={params} />
+      <Header hideCalendar closeRoute="/" hideDayNavigation />
       <FlexClient direction="column" padding={4} flex={1}>
         <CalendarDataProvider />
       </FlexClient>

@@ -1,10 +1,10 @@
-import ClientProviders from "./ClientProviders";
+import ChakraProviderClient from "./client-wrappers/ChakraProviderClient";
 
 function MyApp({ children }: { children: any }) {
   return (
     <html lang="en">
       <body>
-        <ClientProviders>{children}</ClientProviders>
+        <ChakraProviderClient>{children}</ChakraProviderClient>
       </body>
     </html>
   );

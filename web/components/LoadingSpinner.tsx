@@ -1,3 +1,5 @@
+"use client";
+
 import { Flex, Spinner } from "@chakra-ui/react";
 
 const LoadingSpinner: React.FC = () => {

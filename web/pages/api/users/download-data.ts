@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { downloadData } from "../../../../lib/server/download-data";
-import { sanitizeUserId } from "../../../../lib/server/sanitization";
-import { validateUserId } from "../../../../lib/server/validation";
+import { downloadData } from "../../../lib/server/download-data";
+import { sanitizeUserId } from "../../../lib/server/sanitization";
+import { updateCookie } from "../../../lib/server/update-cookie";
+import { validateUserId } from "../../../lib/server/validation";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,8 +10,13 @@ export default async function handler(
 ) {
   const {
     method,
-    query: { userId },
+    cookies: { userId },
   } = req;
+
+  if (!userId) {
+    res.status(403).end();
+    return;
+  }
 
   switch (method) {
     case "GET": {
@@ -21,6 +27,8 @@ export default async function handler(
       }
 
       const sanitizedUserId = sanitizeUserId(userId as string);
+
+      updateCookie(res, sanitizedUserId);
 
       await downloadData(sanitizedUserId, res);
       break;
