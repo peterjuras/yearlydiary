@@ -34,3 +34,6 @@ export default function AllPostsForDayPage({
     </FlexClient>
   );
 }
+
+export const dynamicParams = true;
+export const revalidate = 60;

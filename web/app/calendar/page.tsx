@@ -1,13 +1,8 @@
-import { NextPage } from "next";
 import Header from "../Header";
 import FlexClient from "../client-wrappers/FlexClient";
 import CalendarDataProvider from "./CalendarDataProvider";
 
-type CalendarPageProps = {
-  params: Record<string, string>;
-};
-
-const CalendarPage: NextPage<CalendarPageProps> = ({ params }) => {
+export default function CalendarPage() {
   return (
     <FlexClient
       margin="0 auto"
@@ -21,6 +16,6 @@ const CalendarPage: NextPage<CalendarPageProps> = ({ params }) => {
       </FlexClient>
     </FlexClient>
   );
-};
+}
 
-export default CalendarPage;
+export const dynamic = "force-dynamic";

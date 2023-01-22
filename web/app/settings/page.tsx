@@ -1,11 +1,10 @@
 "use client";
 
 import { Flex } from "@chakra-ui/react";
-import { NextPage } from "next";
 import Settings from "../../components/Settings";
 import Header from "../Header";
 
-const SettingsPage: NextPage = () => {
+export default function SettingsPage() {
   return (
     <Flex margin="0 auto" direction="column" height="100vh" maxWidth={800}>
       <Header closeRoute="/" hideDayNavigation />
@@ -14,6 +13,4 @@ const SettingsPage: NextPage = () => {
       </Flex>
     </Flex>
   );
-};
-
-export default SettingsPage;
+}
