@@ -18,7 +18,8 @@ enum SetupMode {
 const SettingsSetup = () => {
   const [setupMode, setSetupMode] = useState(SetupMode.None);
 
-  const hasUser = document && cookie.parse(document.cookie).userId;
+  const hasUser =
+    typeof document !== "undefined" && cookie.parse(document.cookie).userId;
 
   const getSetupCodeUrl =
     hasUser && setupMode === SetupMode.DisplayCode

@@ -18,8 +18,10 @@ const Settings: React.FC = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const downloadDataUrl = `/api/users/download-data`;
-  const parsedCookies = cookie.parse(document.cookie);
-  const buttonsDisabled = isBusy || !document || !parsedCookies.userId;
+  const parsedCookies =
+    typeof document !== "undefined" ? cookie.parse(document.cookie) : {};
+  const buttonsDisabled =
+    isBusy || typeof document === "undefined" || !parsedCookies.userId;
 
   async function onDeleteDataClick() {
     try {

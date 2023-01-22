@@ -1,4 +1,5 @@
 import AllPostsDiaryPage from "../../../../../components/AllPostsDiaryPage";
+import { questions } from "../../../../../lib/server/questions";
 import FlexClient from "../../../../client-wrappers/FlexClient";
 import Header from "../../../../Header";
 
@@ -33,6 +34,17 @@ export default function AllPostsForDayPage({
       </FlexClient>
     </FlexClient>
   );
+}
+
+export function generateStaticParams() {
+  const params = [];
+  for (const [monthText, days] of Object.entries(questions)) {
+    const month = parseInt(monthText, 10) + 1;
+    for (const day of Object.keys(days)) {
+      params.push({ month: `${month}`, day });
+    }
+  }
+  return params;
 }
 
 export const dynamicParams = true;
