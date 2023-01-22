@@ -1,12 +1,12 @@
 import { CheckCircleIcon } from "@chakra-ui/icons";
-import { Button, Flex, Input, Spinner, Text } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useCountdown } from "react-time-sync";
 import useSWR from "swr";
+import cookie from "cookie";
 import formatDate from "date-fns/format";
 import { fetcher } from "../lib/client/fetcher";
 import SettingsSetupEnterCode from "./SettingsSetupEnterCode";
-import { UserContext } from "./UserContext";
 
 enum SetupMode {
   None,
@@ -16,13 +16,14 @@ enum SetupMode {
 }
 
 const SettingsSetup = () => {
-  const { user } = useContext(UserContext);
-
   const [setupMode, setSetupMode] = useState(SetupMode.None);
 
+  const hasUser =
+    typeof document !== "undefined" && cookie.parse(document.cookie).userId;
+
   const getSetupCodeUrl =
-    user?.userId && setupMode === SetupMode.DisplayCode
-      ? `/api/users/${user.userId}/setup-code`
+    hasUser && setupMode === SetupMode.DisplayCode
+      ? `/api/users/setup-code`
       : null;
 
   const setupCodeResponse = useSWR<{ code: string; expiryDate: string }>(
@@ -63,7 +64,7 @@ const SettingsSetup = () => {
       content = (
         <>
           <Button
-            disabled={!user?.userId}
+            disabled={!hasUser}
             marginTop={5}
             marginBottom={5}
             width={200}
@@ -72,7 +73,7 @@ const SettingsSetup = () => {
             Add another device
           </Button>
           <Button
-            disabled={!user?.userId}
+            disabled={!hasUser}
             marginBottom={5}
             width={200}
             onClick={onEnterCodeClick}

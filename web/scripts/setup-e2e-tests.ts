@@ -18,6 +18,7 @@ async function main() {
   await execa("yarn", ["dev", "-p", "9234"], {
     env: {
       NODE_ENV: "development",
+      NEXT_PUBLIC_E2E_TESTS_ACTIVE: "true",
       DATABASE_URL: LOCAL_DB_URL,
     },
   });

@@ -1,7 +1,6 @@
 import { Button, Flex, Input, Spinner, Text } from "@chakra-ui/react";
 import { ChangeEventHandler, useContext, useRef, useState } from "react";
 import { getUserInfoFromSetupCode } from "../lib/client/api";
-import { UserContext } from "./UserContext";
 
 interface SettingsSetupEnterCodeProps {
   onSuccess: () => void;
@@ -10,8 +9,6 @@ interface SettingsSetupEnterCodeProps {
 const SettingsSetupEnterCode: React.FC<SettingsSetupEnterCodeProps> = ({
   onSuccess,
 }) => {
-  const { updateUser } = useContext(UserContext);
-
   const [inputValue1, setInputValue1] = useState("");
   const [inputValue2, setInputValue2] = useState("");
   const [inputValue3, setInputValue3] = useState("");
@@ -71,8 +68,7 @@ const SettingsSetupEnterCode: React.FC<SettingsSetupEnterCodeProps> = ({
     try {
       setIsSubmitting(true);
 
-      const userInfo = await getUserInfoFromSetupCode(currentCode);
-      updateUser(userInfo);
+      await getUserInfoFromSetupCode(currentCode);
       onSuccess();
     } catch (error) {
       console.error(error);

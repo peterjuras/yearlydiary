@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getUserInfoFromSetupCode } from "../../../../lib/server/db";
+import { updateCookie } from "../../../../lib/server/update-cookie";
 import { validateSetupCode } from "../../../../lib/server/validation";
 import { User } from "../../../../types/user";
 
@@ -28,6 +29,8 @@ async function getHandler(req: NextApiRequest, res: NextApiResponse) {
     userId: userInfoRaw.user_id,
     publicPosts: userInfoRaw.public_posts,
   };
+
+  updateCookie(res, userInfo.userId);
 
   res.json(userInfo);
 }

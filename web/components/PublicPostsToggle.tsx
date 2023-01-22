@@ -1,10 +1,16 @@
 import { FormControl, FormLabel, Switch } from "@chakra-ui/react";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { updateUser as updateUserApi } from "../lib/client/api";
-import { UserContext } from "./UserContext";
 
-const PublicPostsToggle: React.FC = () => {
-  const { user, updateUser } = useContext(UserContext);
+type PublicPostsToggleProps = {
+  disabled?: boolean;
+  publicPosts: boolean;
+};
+
+const PublicPostsToggle: React.FC<PublicPostsToggleProps> = ({
+  disabled,
+  publicPosts,
+}) => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   async function onSwitchChanged(event: ChangeEvent<HTMLInputElement>) {
@@ -13,11 +19,7 @@ const PublicPostsToggle: React.FC = () => {
     setIsUpdating(true);
 
     try {
-      await updateUserApi(user!.userId, newPublicPosts);
-      updateUser({
-        ...user!,
-        publicPosts: newPublicPosts,
-      });
+      await updateUserApi(newPublicPosts);
     } catch (error) {
       // TODO: Display error
     } finally {
@@ -32,8 +34,8 @@ const PublicPostsToggle: React.FC = () => {
       </FormLabel>
       <Switch
         id="public-posts"
-        disabled={!user || isUpdating}
-        isChecked={user?.publicPosts}
+        disabled={isUpdating || disabled}
+        isChecked={publicPosts}
         onChange={onSwitchChanged}
       />
     </FormControl>

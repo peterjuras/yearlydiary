@@ -1,23 +1,11 @@
 import { User } from "../../types/user";
 
-export async function createUser(): Promise<User> {
-  const response = await fetch("/api/users", {
-    method: "POST",
-  });
-  const result = await response.json();
-
-  return result;
-}
-
-export async function updateUser(
-  userId: string,
-  publicPosts: boolean
-): Promise<void> {
+export async function updateUser(publicPosts: boolean): Promise<void> {
   const body = {
     publicPosts,
   };
 
-  const response = await fetch(`/api/users/${userId}`, {
+  const response = await fetch(`/api/users`, {
     method: "PUT",
     body: JSON.stringify(body),
   });
@@ -29,7 +17,6 @@ export async function updateUser(
 }
 
 export async function uploadPost(
-  userId: string,
   day: number,
   month: number,
   year: number,
@@ -42,7 +29,7 @@ export async function uploadPost(
     answer,
   };
 
-  const uploadPostUrl = `/api/users/${userId}/posts`;
+  const uploadPostUrl = `/api/posts`;
 
   const response = await fetch(uploadPostUrl, {
     method: "POST",
@@ -55,8 +42,8 @@ export async function uploadPost(
   }
 }
 
-export async function deleteUserData(userId: string) {
-  const deleteUserUrl = `/api/users/${userId}`;
+export async function deleteUserData() {
+  const deleteUserUrl = `/api/users`;
 
   const response = await fetch(deleteUserUrl, {
     method: "DELETE",

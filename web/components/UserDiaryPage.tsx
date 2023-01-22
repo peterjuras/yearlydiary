@@ -1,49 +1,59 @@
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import useSWR from "swr";
-import { fetcher } from "../lib/client/fetcher";
-import { Answer } from "../types/answer";
-import AnswerInput from "./AnswerInput";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
+import { getUserInfo, getUserPostsForDay } from "../lib/server/db";
+import { questions } from "../lib/server/questions";
 import LoadingSpinner from "./LoadingSpinner";
-import PreviousAnswers from "./PreviousAnswers";
+import PostInput from "./PostInput";
 import QuestionDisplay from "./QuestionDisplay";
-import { UserContext } from "./UserContext";
+import UserDiaryPagePostsProvider from "./UserDiaryPagePostsProvider";
 
-const UserDiaryPage: React.FC = () => {
-  const { user } = useContext(UserContext);
+type UserDiaryPageProps = {
+  month: number;
+  day: number;
+};
 
-  const router = useRouter();
-  const { day, month } = router.query;
-  const getPostUrl = `/api/users/${user?.userId}/posts/${
-    parseInt(month as string) - 1
-  }/${day}`;
+const UserDiaryPage: React.FC<UserDiaryPageProps> = ({ month, day }) => {
+  const userId = cookies().get("userId")?.value;
 
-  const { data, error } = useSWR<{ answers: Answer[]; question: string }>(
-    user?.userId && router.isReady ? getPostUrl : null,
-    fetcher
-  );
-
-  if (!data && !error) {
-    return <LoadingSpinner />;
+  let postsPromise: ReturnType<typeof getUserPostsForDay>;
+  let userInfoPromise: ReturnType<typeof getUserInfo>;
+  if (!userId) {
+    // TODO: Return separte UI without suspense boundary
+    postsPromise = Promise.resolve([]);
+    userInfoPromise = Promise.resolve({
+      public_posts: true,
+    });
+  } else {
+    postsPromise = getUserPostsForDay(userId, day, month);
+    userInfoPromise = getUserInfo(userId);
   }
 
-  if (error || !data) {
-    return <div>TODO: Explain error</div>;
-  }
+  const question = questions[month][day];
 
-  const currentYear = new Date().getFullYear();
-  const storedAnswer = data.answers.find(
-    (answer) => answer.year === currentYear
-  );
-  const previousAnswers = data.answers.filter(
-    (answer) => answer.year !== currentYear
-  );
+  // TODO: Errorboundary
 
   return (
     <>
-      <QuestionDisplay question={data.question} />
-      <AnswerInput storedAnswer={storedAnswer} currentYear={currentYear} />
-      <PreviousAnswers answers={previousAnswers} />
+      <QuestionDisplay question={question} />
+      <Suspense
+        fallback={
+          <PostInput
+            disabled
+            currentYear={new Date().getFullYear()}
+            month={month}
+            day={day}
+            publicPosts={true}
+          />
+        }
+      >
+        {/* @ts-expect-error React can't deal with async functions yet */}
+        <UserDiaryPagePostsProvider
+          postsPromise={postsPromise}
+          userInfoPromise={userInfoPromise}
+          month={month}
+          day={day}
+        />
+      </Suspense>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { v4 as uuid } from "uuid";
 import { PostDates } from "../../types/post-dates";
 import { User } from "../../types/user";
-import { Answer, answerSchema } from "../../types/answer";
+import { Post, postSchema } from "../../types/post";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Environment variable DATABASE_URL must be defined");
@@ -74,11 +74,11 @@ export async function getUserPostsForDay(
   userId: string,
   day: number,
   month: number
-): Promise<Readonly<Answer[]>> {
+): Promise<Readonly<Post[]>> {
   const db = await getDb();
 
   const result = await db.query(
-    sql.type(answerSchema)`
+    sql.type(postSchema)`
   SELECT ANSWER, YEAR FROM POSTS
   WHERE
   USER_ID = (SELECT ID FROM USERS WHERE USER_ID = ${userId})
@@ -96,7 +96,7 @@ export async function getPostsForDay(
   day: number,
   month: number,
   offset: number
-): Promise<Readonly<{ answer: string }[]>> {
+): Promise<Readonly<{ answer: string; year: number }[]>> {
   const db = await getDb();
 
   const results = await db.query(sql.type(
@@ -210,6 +210,17 @@ export async function insertSetupCode(
       TO_TIMESTAMP(${expiryDate.getTime() / 1000})
     )
   `);
+}
+
+export async function getUserInfo(userId: string) {
+  const db = await getDb();
+
+  const result = await db.one(sql.type(z.object({ public_posts: z.boolean() }))`
+    SELECT PUBLIC_POSTS FROM USERS
+    WHERE USER_ID = ${userId}
+  `);
+
+  return result;
 }
 
 export async function getUserInfoFromSetupCode(setupCode: string) {

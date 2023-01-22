@@ -1,4 +1,5 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import FlexClient from "../app/client-wrappers/FlexClient";
+import HeadingClient from "../app/client-wrappers/HeadingClient";
 
 interface QuestionDisplayProps {
   question: string;
@@ -6,9 +7,9 @@ interface QuestionDisplayProps {
 
 const QuestionDisplay: React.FC<QuestionDisplayProps> = ({ question }) => {
   return (
-    <Flex marginTop={10} marginBottom={10} justify="center">
-      <Heading>{question}</Heading>
-    </Flex>
+    <FlexClient marginTop={10} marginBottom={10} justify="center">
+      <HeadingClient>{question}</HeadingClient>
+    </FlexClient>
   );
 };
 
