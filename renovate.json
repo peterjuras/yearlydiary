@@ -13,6 +13,11 @@
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
       "automergeType": "branch"
+    },
+    {
+      "matchPackageNames": ["execa"],
+      "matchPaths": ["web/"],
+      "allowedVersions": "<6"
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
