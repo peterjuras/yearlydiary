@@ -16,7 +16,7 @@
     },
     {
       "matchPackageNames": ["execa"],
-      "matchPaths": ["web/"],
+      "matchFiles": ["web/package.json"],
       "allowedVersions": "<6"
     }
   ],
