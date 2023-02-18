@@ -1,8 +1,6 @@
 name: yearlydiary
 on:
-  push:
-    branches-ignore:
-      - renovate/execa-6.x
+  - push
 
 jobs:
   test:
