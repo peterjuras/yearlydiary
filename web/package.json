@@ -40,7 +40,7 @@
     "archiver": "5.3.1",
     "cookie": "0.5.0",
     "date-fns": "2.29.3",
-    "framer-motion": "9.1.6",
+    "framer-motion": "9.1.7",
     "next": "13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -48,7 +48,7 @@
     "react-time-sync": "5.2.1",
     "slonik": "33.0.10",
     "stream-buffers": "3.0.2",
-    "swr": "2.0.3",
+    "swr": "2.0.4",
     "uuid": "9.0.0",
     "zod": "3.20.6"
   },
