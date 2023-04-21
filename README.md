@@ -1,6 +1,6 @@
 # yearlydiary
 
-[![GitHub license](https://img.shields.io/github/license/peterjuras/yearlydiary)](https://github.com/peterjuras/yearlydiary/blob/main/LICENSE) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/peterjuras/yearlydiary/yearlydiary)
+[![GitHub license](https://img.shields.io/github/license/peterjuras/yearlydiary)](https://github.com/peterjuras/yearlydiary/blob/main/LICENSE) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/peterjuras/yearlydiary/ci.yml?branch=main)
 
 [Check it out and start your yearly diary!](https://yearlydiary.vercel.app/)
 
