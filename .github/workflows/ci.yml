@@ -56,3 +56,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+  notify-on-failure:
+    needs:
+      - test
+      - deploy
+    runs-on: ubuntu-latest
+    if: failure() # only run this job when any of the previous jobs fail.
+    steps:
+      - name: Notify through commit comment
+        uses: peter-evans/commit-comment@v2
+        with:
+          body: "@peterjuras: The workflow failed!"
