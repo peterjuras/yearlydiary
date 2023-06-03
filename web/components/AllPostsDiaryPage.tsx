@@ -24,7 +24,6 @@ const AllPostsDiaryPage: React.FC<AllPostsDiaryPageProps> = ({
     <>
       <QuestionDisplay question={question} />
       <Suspense fallback={<LoadingSpinner />}>
-        {/** @ts-expect-error React can't deal with async functions yet */}
         <AllPostsProvider allPostsPromise={allPostsPromise} />
       </Suspense>
     </>

@@ -46,7 +46,6 @@ const UserDiaryPage: React.FC<UserDiaryPageProps> = ({ month, day }) => {
           />
         }
       >
-        {/* @ts-expect-error React can't deal with async functions yet */}
         <UserDiaryPagePostsProvider
           postsPromise={postsPromise}
           userInfoPromise={userInfoPromise}
