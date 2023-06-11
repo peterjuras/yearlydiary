@@ -61,7 +61,7 @@
     "@types/cookie": "0.5.1",
     "@types/jest": "29.5.2",
     "@types/node": "18.16.16",
-    "@types/react": "18.2.9",
+    "@types/react": "18.2.11",
     "@types/react-dom": "18.2.4",
     "@types/stream-buffers": "3.0.4",
     "@types/uuid": "9.0.2",
