@@ -239,3 +239,9 @@ export async function getUserInfoFromSetupCode(setupCode: string) {
   `);
   return result;
 }
+
+export async function ciWarmup() {
+  const db = await getDb();
+
+  await db.query(sql.unsafe`SELECT`);
+}

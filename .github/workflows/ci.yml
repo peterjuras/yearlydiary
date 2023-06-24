@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Warm up yearlydiary database
         # Request a random diary page to ensure database connection is established
-        run: curl -i https://yearlydiary.vercel.app/diary/6/12
+        run: curl -i https://yearlydiary.vercel.app/ci-warmup
       - name: Deploy to vercel (production)
         if: github.ref == 'refs/heads/main'
         uses: amondnet/vercel-action@v25.1.1
