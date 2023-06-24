@@ -6,3 +6,5 @@ export async function GET() {
 
   return NextResponse.json("ok");
 }
+
+export const dynamic = "force-dynamic";
