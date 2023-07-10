@@ -28,7 +28,7 @@ const SettingsSetup = () => {
 
   const setupCodeResponse = useSWR<{ code: string; expiryDate: string }>(
     getSetupCodeUrl,
-    fetcher
+    fetcher,
   );
 
   let expiryDateUntil = 0;

@@ -1,7 +1,7 @@
 import { addDays } from "date-fns";
 
 export function* validateDay(
-  day: string | string[] | undefined
+  day: string | string[] | undefined,
 ): Generator<string> {
   if (typeof day === "undefined" || Array.isArray(day)) {
     yield "day must be an integer.";
@@ -20,7 +20,7 @@ export function* validateDay(
 }
 
 export function* validateMonth(
-  month: string | string[] | undefined
+  month: string | string[] | undefined,
 ): Generator<string> {
   if (typeof month === "undefined" || Array.isArray(month)) {
     yield "month must be an integer.";
@@ -38,7 +38,7 @@ export function* validateMonth(
 }
 
 export function* validateYear(
-  year: string | string[] | undefined
+  year: string | string[] | undefined,
 ): Generator<string> {
   if (typeof year === "undefined" || Array.isArray(year)) {
     yield "year must be an integer.";
@@ -63,7 +63,7 @@ export function* validatePostDate(
   today: Date,
   year: number,
   month: number,
-  day: number
+  day: number,
 ): Generator<string> {
   const yesterday = addDays(today, -1);
   const tomorrow = addDays(today, 1);
@@ -83,7 +83,7 @@ export function* validatePostDate(
 }
 
 export function* validateOffset(
-  offset: string | string[] | undefined
+  offset: string | string[] | undefined,
 ): Generator<string> {
   if (typeof offset === "undefined") {
     return;
@@ -105,7 +105,7 @@ export function* validateOffset(
 }
 
 export function* validateUserId(
-  userId: string | string[] | undefined
+  userId: string | string[] | undefined,
 ): Generator<string> {
   if (typeof userId !== "string") {
     yield "userId must be a string.";
@@ -143,7 +143,7 @@ export function* validatePublicPosts(publicPosts: boolean): Generator<string> {
 }
 
 export function* validateSetupCode(
-  setupCode: string | string[] | undefined
+  setupCode: string | string[] | undefined,
 ): Generator<string> {
   if (typeof setupCode !== "string") {
     yield "setupCode must be a string.";

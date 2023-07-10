@@ -6,7 +6,7 @@ import { validateUserId } from "../../../lib/server/validation";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const {
     method,

@@ -20,7 +20,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       DELETE FROM setup_codes WHERE expires_at < NOW();
       RETURN NEW;
     END
-  `
+  `,
   );
   pgm.createTrigger(SETUP_CODES_TABLE, DELETE_EXPIRED_SETUP_CODES_TRIGGER, {
     when: "BEFORE",

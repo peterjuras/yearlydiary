@@ -43,7 +43,7 @@ const SettingsSetupEnterCode: React.FC<SettingsSetupEnterCodeProps> = ({
     // Ensure field only contains a single character
     const newFieldValue = event.target.value.substring(
       event.target.value.length - 1,
-      event.target.value.length
+      event.target.value.length,
     );
     inputValueSetters[index](newFieldValue);
 

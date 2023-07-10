@@ -31,7 +31,7 @@ async function main() {
     ],
     {
       stdio: "inherit",
-    }
+    },
   );
 
   await bootstrapDatabase();
