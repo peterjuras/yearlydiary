@@ -20,7 +20,7 @@ export async function uploadPost(
   day: number,
   month: number,
   year: number,
-  answer: string
+  answer: string,
 ): Promise<void> {
   const body = {
     day,
@@ -56,7 +56,7 @@ export async function deleteUserData() {
 }
 
 export async function getUserInfoFromSetupCode(
-  setupCode: string
+  setupCode: string,
 ): Promise<User> {
   const getUserInfoUrl = `/api/users/setup-codes/${setupCode}`;
 

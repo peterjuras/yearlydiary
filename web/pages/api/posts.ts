@@ -53,7 +53,7 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
       new Date(),
       sanitizedYear,
       sanitizedMonth,
-      sanitizedDay
+      sanitizedDay,
     ),
   ];
   if (postIssues.length) {
@@ -66,7 +66,7 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
     sanitizedDay,
     sanitizedMonth,
     sanitizedYear,
-    sanitizedAnswer
+    sanitizedAnswer,
   );
 
   updateCookie(res, sanitizedUserId);
@@ -76,7 +76,7 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const { method } = req;
 

@@ -8,7 +8,7 @@ export function updateCookie(res: NextApiResponse, userId: string) {
       sameSite: true,
       path: "/",
       maxAge: 1735707600,
-    })
+    }),
   );
 }
 
@@ -19,6 +19,6 @@ export function deleteCookie(res: NextApiResponse) {
       sameSite: true,
       path: "/",
       maxAge: 0,
-    })
+    }),
   );
 }

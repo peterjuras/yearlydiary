@@ -40,7 +40,7 @@ export async function createUser(): Promise<User> {
 
 export async function updateUser(
   userId: string,
-  publicPosts: boolean
+  publicPosts: boolean,
 ): Promise<void> {
   const db = await getDb();
 
@@ -56,7 +56,7 @@ export async function storePost(
   day: number,
   month: number,
   year: number,
-  answer: string
+  answer: string,
 ): Promise<void> {
   const db = await getDb();
 
@@ -73,7 +73,7 @@ export async function storePost(
 export async function getUserPostsForDay(
   userId: string,
   day: number,
-  month: number
+  month: number,
 ): Promise<Readonly<Post[]>> {
   const db = await getDb();
 
@@ -86,7 +86,7 @@ export async function getUserPostsForDay(
   DAY = ${day} AND
   MONTH = ${month}
   ORDER BY YEAR DESC
-  `
+  `,
   );
 
   return result.rows;
@@ -95,7 +95,7 @@ export async function getUserPostsForDay(
 export async function getPostsForDay(
   day: number,
   month: number,
-  offset: number
+  offset: number,
 ): Promise<Readonly<{ answer: string; year: number }[]>> {
   const db = await getDb();
 
@@ -103,7 +103,7 @@ export async function getPostsForDay(
     z.object({
       answer: z.string(),
       year: z.number(),
-    })
+    }),
   )`
   SELECT ANSWER, YEAR FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
@@ -125,7 +125,7 @@ export async function getPostDatesForUser(userId: string): Promise<PostDates> {
     z.object({
       month: z.number(),
       day: z.number(),
-    })
+    }),
   )`
   SELECT DISTINCT MONTH, DAY FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
@@ -159,7 +159,7 @@ export async function getUserEntry(userId: string) {
       user_id: z.string(),
       public_posts: z.boolean(),
       created_at: z.number(),
-    })
+    }),
   )`
   SELECT USER_ID, PUBLIC_POSTS, CREATED_AT FROM USERS WHERE USER_ID = ${userId}
   `);
@@ -170,7 +170,7 @@ export async function getUserEntry(userId: string) {
 export async function getUserPosts(
   userId: string,
   offset: number,
-  limit: number
+  limit: number,
 ) {
   const db = await getDb();
 
@@ -181,7 +181,7 @@ export async function getUserPosts(
       year: z.number(),
       answer: z.string(),
       created_at: z.number(),
-    })
+    }),
   )`
   SELECT DAY, MONTH, YEAR, ANSWER, POSTS.CREATED_AT FROM POSTS JOIN USERS ON POSTS.USER_ID = USERS.ID
   WHERE
@@ -196,7 +196,7 @@ export async function getUserPosts(
 export async function insertSetupCode(
   userId: string,
   code: string,
-  expiryDate: Date
+  expiryDate: Date,
 ) {
   const db = await getDb();
 
@@ -230,7 +230,7 @@ export async function getUserInfoFromSetupCode(setupCode: string) {
     z.object({
       user_id: z.string(),
       public_posts: z.boolean(),
-    })
+    }),
   )`
     SELECT USERS.USER_ID, PUBLIC_POSTS FROM USERS JOIN SETUP_CODES
     ON USERS.ID = SETUP_CODES.USER_ID

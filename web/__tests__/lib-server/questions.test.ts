@@ -23,6 +23,6 @@ describe("questions", () => {
       for (let i = 1; i <= expectedDays; i++) {
         expect(questionsForMonth[i]).toBeTruthy();
       }
-    }
+    },
   );
 });

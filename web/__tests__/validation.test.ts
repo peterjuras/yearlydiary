@@ -37,7 +37,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("day must be an integer.");
-      }
+      },
     );
 
     test("should return an issue if too low", () => {
@@ -81,7 +81,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("month must be an integer.");
-      }
+      },
     );
 
     test("should return an issue if too low", () => {
@@ -121,7 +121,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("year must be an integer.");
-      }
+      },
     );
 
     test("should return an issue if too low", () => {
@@ -159,7 +159,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("offset must be an integer.");
-      }
+      },
     );
 
     test("should return an issue if too low", () => {
@@ -194,7 +194,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("userId must be a string.");
-      }
+      },
     );
 
     test("should return an issue if it's an empty string", () => {
@@ -236,7 +236,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("answer must be a string.");
-      }
+      },
     );
 
     test("should return an issue if it's an empty string", () => {
@@ -286,7 +286,7 @@ describe("validation", () => {
 
         expect(issues).toHaveLength(1);
         expect(issues[0]).toBe("publicPosts must be a boolean.");
-      }
+      },
     );
   });
 
