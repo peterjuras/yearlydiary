@@ -63,6 +63,7 @@ const PostInput: React.FC<PostInputProps> = ({
     // Hardcode year to leap year to allow display of Feb 29
     nextPostDate.setFullYear(2020);
 
+    nextPostDate.setDate(1);
     nextPostDate.setMonth(month);
     nextPostDate.setDate(day);
 

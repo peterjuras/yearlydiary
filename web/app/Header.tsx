@@ -39,6 +39,7 @@ const Header: React.FC<HeaderProps> = ({
     // Hardcode a leap year, to allow navigation to Feb 29
     date.setFullYear(2020);
 
+    date.setDate(1);
     date.setMonth(month);
     date.setDate(day);
 
