@@ -4544,9 +4544,9 @@ iterator.prototype@^1.1.0:
     reflect.getprototypeof "^1.0.3"
 
 jackspeak@^2.0.3:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/jackspeak/-/jackspeak-2.3.1.tgz#ce2effa4c458e053640e61938865a5b5fae98456"
-  integrity sha512-4iSY3Bh1Htv+kLhiiZunUhQ+OYXIn0ze3ulq8JeWrFKmhPAJSySV2+kdtRh2pGcCeF0s6oR8Oc+pYZynJj4t8A==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/jackspeak/-/jackspeak-2.3.2.tgz#282fd89ce332006a917644d1c687278862467d4d"
+  integrity sha512-TRq6lCC0IyuVVeQxH7oumqlPsLy1rJ6PQGY6r/NgszpPLMcikNC73vCCu9zZMzpCRlneSAUzQubnwgL/2oafWA==
   dependencies:
     "@isaacs/cliui" "^8.0.2"
   optionalDependencies:
