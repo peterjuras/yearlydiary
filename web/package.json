@@ -60,7 +60,7 @@
     "@types/archiver": "5.3.3",
     "@types/cookie": "0.5.2",
     "@types/jest": "29.5.5",
-    "@types/node": "18.18.0",
+    "@types/node": "18.18.1",
     "@types/react": "18.2.23",
     "@types/react-dom": "18.2.8",
     "@types/stream-buffers": "3.0.5",
