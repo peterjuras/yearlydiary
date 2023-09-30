@@ -46,7 +46,7 @@
     "react-dom": "18.2.0",
     "react-icons": "4.11.0",
     "react-time-sync": "5.2.1",
-    "slonik": "36.0.0",
+    "slonik": "37.0.1",
     "stream-buffers": "3.0.2",
     "swr": "2.2.4",
     "uuid": "9.0.1",

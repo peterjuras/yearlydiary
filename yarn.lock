@@ -6528,10 +6528,10 @@ slice-ansi@^5.0.0:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
 
-slonik@36.0.0:
-  version "36.0.0"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-36.0.0.tgz#6b7d8e61b8a97c2a81d03cc0d881127b0740dda7"
-  integrity sha512-IrEnSYcVP/qMuhpYWT8m8VorrzySjqNR3DxaOzVnGWHb8a1MftoPVBnMfBLa2yLpS6UPhZjFhYiXLYUHtn2zLg==
+slonik@37.0.1:
+  version "37.0.1"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-37.0.1.tgz#b9b9a79273079ceb6b8176696736a0481d78993e"
+  integrity sha512-Otcmpcai0Xm/bi4UZt0j6AN6ktkh8cw1XijI1L3NItNpqHpRyhJF4VVyMCxyLwhMWtW5uvfWTaq1RB8em2DyQQ==
   dependencies:
     "@types/pg" "^8.10.2"
     es6-error "^4.1.1"
