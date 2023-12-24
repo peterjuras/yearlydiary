@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCountdown } from "react-time-sync";
 import useSWR from "swr";
 import cookie from "cookie";
-import formatDate from "date-fns/format";
+import { format as formatDate } from "date-fns/format";
 import { fetcher } from "../lib/client/fetcher";
 import SettingsSetupEnterCode from "./SettingsSetupEnterCode";
 
