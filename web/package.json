@@ -39,7 +39,7 @@
     "@emotion/styled": "11.11.0",
     "archiver": "6.0.1",
     "cookie": "0.6.0",
-    "date-fns": "2.30.0",
+    "date-fns": "3.0.6",
     "framer-motion": "10.16.16",
     "next": "14.0.4",
     "react": "18.2.0",
