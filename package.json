@@ -9,7 +9,7 @@
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "workspaces": {
     "packages": [
@@ -18,7 +18,7 @@
     ]
   },
   "devDependencies": {
-    "husky": "8.0.3",
+    "husky": "9.0.10",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5"
   }
