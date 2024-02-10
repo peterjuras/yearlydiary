@@ -9,7 +9,7 @@
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "build": "yarn workspaces run build",
-    "postinstall": "husky install"
+    "postinstall": "husky"
   },
   "workspaces": {
     "packages": [
