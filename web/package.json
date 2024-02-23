@@ -65,7 +65,7 @@
     "@types/react-dom": "18.2.19",
     "@types/stream-buffers": "3.0.7",
     "@types/uuid": "9.0.8",
-    "eslint": "8.56.0",
+    "eslint": "8.57.0",
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "9.1.0",
     "execa": "5.1.1",
