@@ -1957,10 +1957,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@18.2.67":
-  version "18.2.67"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.67.tgz#96b7af0b5e79c756f4bdd981de2ca28472c858e5"
-  integrity sha512-vkIE2vTIMHQ/xL0rgmuoECBCkZFZeHr49HeWSc24AptMbNRo7pwSBvj73rlJJs9fGKj0koS+V7kQB1jHS0uCgw==
+"@types/react@*", "@types/react@18.2.69":
+  version "18.2.69"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.69.tgz#313ec21891b22bb7646a54cb4bdb8cddb0880271"
+  integrity sha512-W1HOMUWY/1Yyw0ba5TkCV+oqynRjG7BnteBB+B7JmAK7iw3l2SW+VGOxL+akPweix6jk2NNJtyJKpn4TkpfK3Q==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -6587,10 +6587,10 @@ slice-ansi@^7.0.0:
     ansi-styles "^6.2.1"
     is-fullwidth-code-point "^5.0.0"
 
-slonik@37.3.1:
-  version "37.3.1"
-  resolved "https://registry.yarnpkg.com/slonik/-/slonik-37.3.1.tgz#8677ea6709da33daf56e2051c43f2db18d32e472"
-  integrity sha512-vidC0OleHqIrFt5gGWgwy4CUhE+dSo71/661g2MyQFNpT/ZyiBZ1BscGK8gLlw4K8xYTo4SL+POBBLp+X5wYsg==
+slonik@37.4.0:
+  version "37.4.0"
+  resolved "https://registry.yarnpkg.com/slonik/-/slonik-37.4.0.tgz#ed5740ee5d5d623be20aff38bb7b3ea52b00c5d7"
+  integrity sha512-W9GPnc4M5+JLvrl4aMx2qkpIQrHLo6vAmCc2UeTD5Szl2uBA2ChZo3njdygK1511wrlSSDnOySY+jlLNAfpIvA==
   dependencies:
     "@types/pg" "^8.10.7"
     es6-error "^4.1.1"
