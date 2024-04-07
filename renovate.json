@@ -18,6 +18,10 @@
       "matchPackageNames": ["execa"],
       "matchFiles": ["web/package.json"],
       "allowedVersions": "<6"
+    },
+    {
+      "matchPackageNames": ["eslint"],
+      "allowedVersions": "<9.0.0"
     }
   ],
   "postUpdateOptions": ["yarnDedupeHighest"]
